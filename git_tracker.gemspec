@@ -14,6 +14,7 @@ Gem::Specification.new do |gem|
   EOF
 
   gem.add_development_dependency "rspec", "~> 2.0"
+  gem.add_development_dependency "rspec-spies", "~> 2.0"
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
