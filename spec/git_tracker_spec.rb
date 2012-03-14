@@ -14,8 +14,8 @@ describe GitTracker do
     end
 
     it "doesn't run hooks we don't know about" do
-      GitTracker.execute('non-existent-hook', *args)
-      GitTracker.should_not have_received(:non_existent_hook)
+      lambda { GitTracker.execute('non-existent-hook', *args) }.
+        should raise_error SystemExit, "git-tracker non-existent-hook does not exist."
     end
   end
 
