@@ -1,4 +1,4 @@
-# Git::Tracker
+# GitTracker
 
 TODO: Write a gem description
 
@@ -6,7 +6,7 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'git-tracker'
+    gem 'git_tracker'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install git-tracker
+    $ gem install git_tracker
 
 ## Usage
 
