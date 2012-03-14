@@ -1,4 +1,5 @@
 require "git_tracker/version"
+require "git_tracker/prepare_commit_message"
 
 module GitTracker
   def self.execute(hook, *args)
@@ -7,7 +8,7 @@ module GitTracker
     send(hook_name, *args)
   end
 
-  def self.prepare_commit_msg(file, source=nil, commit_sha=nil)
-
+  def self.prepare_commit_msg(*args)
+    PrepareCommitMessage.run(*args)
   end
 end
