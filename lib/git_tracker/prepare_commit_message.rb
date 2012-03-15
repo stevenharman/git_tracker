@@ -18,6 +18,9 @@ module GitTracker
     def run
       story = Branch.story_number
       exit unless story
+
+      message = CommitMessage.new(file)
+      message.append!("[##{story}]")
     end
   end
 end
