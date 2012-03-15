@@ -29,4 +29,19 @@ describe GitTracker::PrepareCommitMessage do
     end
   end
 
+  describe '#run' do
+
+    context "branch name does not contain a Pivotal Tracker story number" do
+      let(:hook) { GitTracker::PrepareCommitMessage.new("FILE1") }
+      before do
+        GitTracker::Branch.stub(:story_number) { nil }
+      end
+
+      it "exits without updating the commit message" do
+        lambda { hook.run }.should raise_exception(SystemExit)
+        GitTracker::CommitMessage.should_not have_received(:append!)
+      end
+    end
+
+  end
 end
