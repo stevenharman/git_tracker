@@ -11,23 +11,28 @@ describe GitTracker::CommitMessage do
   describe "#mentions_story?" do
     subject { described_class.new(file) }
     let(:file) { "COMMIT_EDITMSG" }
-    before do
-      File.stub(:read).with(file) { commit_message_text }
+
+    def stub_commit_message(story_text)
+      File.stub(:read).with(file) { example_commit_message(story_text) }
     end
 
     context "commit message contains the special Pivotal Tracker story syntax" do
-      let(:commit_message_text) { example_commit_message("[#8675309]") }
-      it { subject.should be_mentions_story("8675309") }
+      it "matches just the number" do
+        stub_commit_message("[#8675309]")
+        subject.should be_mentions_story("8675309")
+      end
 
-      context "with state change" do
-        let(:commit_message_text) { example_commit_message("[Fixes #8675309]") }
-        it { subject.should be_mentions_story("8675309") }
+      it "matches state change and number" do
+        stub_commit_message("[Fixes #8675309]")
+        subject.should be_mentions_story("8675309")
       end
     end
 
     context "commit message doesn't contain the special Pivotal Tracker story syntax" do
-      let(:commit_message_text) { example_commit_message("#8675309") }
-      it { subject.should_not be_mentions_story("8675309") }
+      it "doesn't match without brackets" do
+        stub_commit_message("#8675309")
+        subject.should_not be_mentions_story("8675309")
+      end
     end
   end
 
