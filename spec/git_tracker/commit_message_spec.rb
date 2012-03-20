@@ -7,10 +7,10 @@ describe GitTracker::CommitMessage do
   end
 
   describe "#contains?" do
-    subject { described_class.new(commit_message_file) }
-    let(:commit_message_file) { "COMMIT_EDITMSG" }
+    subject { described_class.new(file) }
+    let(:file) { "COMMIT_EDITMSG" }
     before do
-      File.stub(:read).with(commit_message_file) { EXAMPLE_COMMIT_EDITMSG }
+      File.stub(:read).with(file) { example_commit_message("[#8675309]") }
     end
 
     context "commit message contains the special Pivotal Tracker story syntax" do
@@ -18,10 +18,11 @@ describe GitTracker::CommitMessage do
     end
   end
 
-  EXAMPLE_COMMIT_EDITMSG = <<-EXAMPLE
+  def example_commit_message(pattern_to_match)
+    return <<-EXAMPLE
 Got Jenny's number, gonna' make her mine!
 
-[#8675309]
+#{pattern_to_match}
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
 # On branch get_jennys_number_#8675309
@@ -32,4 +33,5 @@ Got Jenny's number, gonna' make her mine!
 #
 
 EXAMPLE
+  end
 end
