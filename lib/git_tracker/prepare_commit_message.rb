@@ -20,6 +20,7 @@ module GitTracker
       exit unless story
 
       message = CommitMessage.new(file)
+      exit if message.contains?("[##{story}]")
       message.append!("[##{story}]")
     end
   end
