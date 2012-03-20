@@ -19,7 +19,7 @@ module GitTracker
       story = story_number_from_branch
 
       message = CommitMessage.new(file)
-      exit if message.contains?("[##{story}]")
+      exit if message.mentions_story?(story)
       message.append!("[##{story}]")
     end
 

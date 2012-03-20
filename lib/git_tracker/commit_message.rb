@@ -5,9 +5,9 @@ module GitTracker
       @file = file
     end
 
-    def contains?(pattern)
+    def mentions_story?(number)
       message = File.read(@file)
-      message.include?(pattern)
+      message =~ %r{\[\w*\s?##{number}]}
     end
 
   end
