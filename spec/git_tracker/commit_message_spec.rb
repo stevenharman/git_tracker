@@ -12,11 +12,17 @@ describe GitTracker::CommitMessage do
     subject { described_class.new(file) }
     let(:file) { "COMMIT_EDITMSG" }
     before do
-      File.stub(:read).with(file) { example_commit_message("[#8675309]") }
+      File.stub(:read).with(file) { commit_message_text }
     end
 
     context "commit message contains the special Pivotal Tracker story syntax" do
+      let(:commit_message_text) { example_commit_message("[#8675309]") }
       it { subject.should be_contains("[#8675309]") }
+    end
+
+    context "commit message doesn't contain the special Pivotal Tracker story syntax" do
+      let(:commit_message_text) { example_commit_message("[#not_it]") }
+      it { subject.should_not be_contains("[#8675309]") }
     end
   end
 
