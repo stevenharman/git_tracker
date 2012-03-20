@@ -35,7 +35,7 @@ describe GitTracker::PrepareCommitMessage do
       GitTracker::Branch.stub(:story_number) { story }
     end
 
-    context "branch name does not contain a Pivotal Tracker story number" do
+    context "branch name without a Pivotal Tracker story number" do
       let(:story) { nil }
 
       it "exits without updating the commit message" do
@@ -44,7 +44,7 @@ describe GitTracker::PrepareCommitMessage do
       end
     end
 
-    context "branch name contains a Pivotal Tracker story number" do
+    context "branch name with a Pivotal Tracker story number" do
       let(:story) { "8675309" }
       let(:commit_message) { stub("CommitMessage", contains?: false) }
       before do
@@ -56,7 +56,7 @@ describe GitTracker::PrepareCommitMessage do
         hook.run
       end
 
-      context "commit message already mentions the story number" do
+      context "number already mentioned in the commit message" do
         before do
           commit_message.stub(:contains?).with("[#8675309]") { true }
         end
