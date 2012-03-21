@@ -10,5 +10,31 @@ module GitTracker
       @message =~ %r{^(?!#).*\[(\w+\s)?(#\d+\s)*##{number}(\s#\d+)*(\s\w+)?\]}
     end
 
+    def append(text)
+      body, postscript = parse(@message)
+      new_message = format_message(body, text, postscript)
+      File.open(@file, 'w') do |f|
+        f.write(new_message)
+      end
+      new_message
+    end
+
+    private
+
+    def parse(message)
+      lines = message.split($/)
+      body = lines.take_while { |line| !line.start_with?("#") }
+      postscript = lines.slice(body.length..-1).join
+      [body.join("\n"), postscript]
+    end
+
+    def format_message(preamble, text, postscript)
+      return <<-MESSAGE
+#{preamble.strip}
+
+#{text}
+#{postscript}
+MESSAGE
+    end
   end
 end

@@ -74,4 +74,42 @@ describe GitTracker::CommitMessage do
     end
   end
 
+  describe "#append" do
+    let(:fake_file) { stub("File", write: 1) }
+    before do
+      File.stub(:open).and_yield(fake_file)
+    end
+    def stub_original_commit_message(message)
+      File.stub(:read) { message }
+    end
+
+    it "handles no existing message" do
+      stub_original_commit_message("\n\n# some other comments\n")
+      new_message = <<-COMMIT_MESSAGE
+
+
+[#8675309]
+# some other comments
+COMMIT_MESSAGE
+
+      subject.append("[#8675309]").should == new_message
+      fake_file.should have_received(:write).with(new_message)
+    end
+
+    it "preserves existing messages" do
+      stub_original_commit_message("Add a first line\n\nWith some more crap here\n# some other comments\n")
+      new_message = <<-COMMIT_MESSAGE
+Add a first line
+
+With some more crap here
+
+[#8675309]
+# some other comments
+COMMIT_MESSAGE
+
+      subject.append("[#8675309]").should == new_message
+      fake_file.should have_received(:write).with(new_message)
+    end
+  end
+
 end
