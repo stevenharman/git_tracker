@@ -22,6 +22,14 @@ describe GitTracker::CommitMessage do
         subject.should be_mentions_story("8675309")
       end
 
+      it "allows multiple numbers" do
+        stub_commit_message("[#99 #777 #8675309 #111222]")
+        subject.should be_mentions_story("99")
+        subject.should be_mentions_story("777")
+        subject.should be_mentions_story("8675309")
+        subject.should be_mentions_story("111222")
+      end
+
       it "allows state change before number" do
         stub_commit_message("[Fixes #8675309]")
         subject.should be_mentions_story("8675309")

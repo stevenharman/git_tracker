@@ -7,7 +7,7 @@ module GitTracker
 
     def mentions_story?(number)
       message = File.read(@file)
-      message =~ %r{\[(\w+\s)?##{number}(\s\w+)?\]}
+      message =~ %r{\[(\w+\s)?(#\d+\s)*##{number}(\s#\d+)*(\s\w+)?\]}
     end
 
   end
