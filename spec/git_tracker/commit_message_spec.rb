@@ -41,7 +41,7 @@ describe GitTracker::CommitMessage do
       end
 
       it "allows surrounding text" do
-        stub_commit_message("derp de herp [Fixes #8675309] de herp-ity derp")
+        stub_commit_message("derp de #herp [Fixes #8675309] de herp-ity derp")
         subject.should be_mentions_story("8675309")
       end
     end
@@ -63,7 +63,12 @@ describe GitTracker::CommitMessage do
       end
 
       it "doesn't allow multiple state changes" do
-        stub_commit_message("[#Fixes Deploys #8675309]")
+        stub_commit_message("[Fixes Deploys #8675309]")
+        subject.should_not be_mentions_story("8675309")
+      end
+
+      it "doesn't allow comments" do
+        stub_commit_message("#[#8675309]")
         subject.should_not be_mentions_story("8675309")
       end
     end
