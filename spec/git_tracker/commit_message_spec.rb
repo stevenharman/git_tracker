@@ -17,20 +17,40 @@ describe GitTracker::CommitMessage do
     end
 
     context "commit message contains the special Pivotal Tracker story syntax" do
-      it "matches just the number" do
+      it "allows just the number" do
         stub_commit_message("[#8675309]")
         subject.should be_mentions_story("8675309")
       end
 
-      it "matches state change and number" do
+      it "allows state change and number" do
         stub_commit_message("[Fixes #8675309]")
+        subject.should be_mentions_story("8675309")
+      end
+
+      it "allows surrounding text" do
+        stub_commit_message("derp de herp [Fixes #8675309] de herp-ity derp")
         subject.should be_mentions_story("8675309")
       end
     end
 
     context "commit message doesn't contain the special Pivotal Tracker story syntax" do
-      it "doesn't match without brackets" do
+      it "requires brackets" do
         stub_commit_message("#8675309")
+        subject.should_not be_mentions_story("8675309")
+      end
+
+      it "requires a pound sign" do
+        stub_commit_message("[8675309]")
+        subject.should_not be_mentions_story("8675309")
+      end
+
+      it "doesn't allow the bare number" do
+        stub_commit_message("8675309")
+        subject.should_not be_mentions_story("8675309")
+      end
+
+      it "doesn't allow multiple state changes" do
+        stub_commit_message("[#Fixes Deploys #8675309]")
         subject.should_not be_mentions_story("8675309")
       end
     end
