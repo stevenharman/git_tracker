@@ -7,7 +7,7 @@ module GitTracker
     end
 
     def mentions_story?(number)
-      @message =~ %r{^(?!#).*\[(\w+\s)?(#\d+\s)*##{number}(\s#\d+)*(\s\w+)?\]}
+      @message =~ /^(?!#).*\[(\w+\s)?(#\d+\s)*##{number}(\s#\d+)*(\s\w+)?\]/io
     end
 
     def append(text)
