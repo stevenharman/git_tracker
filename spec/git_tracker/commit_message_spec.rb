@@ -4,14 +4,14 @@ require 'commit_message_helper'
 describe GitTracker::CommitMessage do
   include CommitMessageHelper
 
+  subject { described_class.new(file) }
+  let(:file) { "COMMIT_EDITMSG" }
+
   it "requires path to the temporary commit message file" do
     -> { GitTracker::CommitMessage.new }.should raise_error ArgumentError
   end
 
   describe "#mentions_story?" do
-    subject { described_class.new(file) }
-    let(:file) { "COMMIT_EDITMSG" }
-
     def stub_commit_message(story_text)
       File.stub(:read).with(file) { example_commit_message(story_text) }
     end
