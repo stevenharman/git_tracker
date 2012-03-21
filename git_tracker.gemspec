@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/highgroove/git_tracker"
   gem.summary       = %q{Teaching Git about Pivotal Tracker.}
   gem.description   = <<-EOF
-    Some simple trick that make working with Pivotal Tracker even
+    Some simple tricks that make working with Pivotal Tracker even
     better... and easier... um, besier!
   EOF
 
