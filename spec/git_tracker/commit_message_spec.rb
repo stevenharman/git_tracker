@@ -22,8 +22,13 @@ describe GitTracker::CommitMessage do
         subject.should be_mentions_story("8675309")
       end
 
-      it "allows state change and number" do
+      it "allows state change before number" do
         stub_commit_message("[Fixes #8675309]")
+        subject.should be_mentions_story("8675309")
+      end
+
+      it "allows state change after the number" do
+        stub_commit_message("[#8675309 Delivered]")
         subject.should be_mentions_story("8675309")
       end
 
