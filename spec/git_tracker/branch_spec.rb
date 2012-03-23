@@ -30,6 +30,9 @@ describe GitTracker::Branch do
   end
 
   context "Not on a branch (HEAD doesn't exist)" do
-    it "finds no story"
+    it "finds no story" do
+      stub_branch('')
+      subject.story_number.should_not be
+    end
   end
 end

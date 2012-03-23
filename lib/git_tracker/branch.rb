@@ -6,7 +6,7 @@ module GitTracker
 
     def self.current
       branch_path = `git symbolic-ref HEAD`
-      branch_path[%r{refs/heads/(?<name>.+)}, :name]
+      branch_path[%r{refs/heads/(?<name>.+)}, :name] || ''
     end
   end
 end
