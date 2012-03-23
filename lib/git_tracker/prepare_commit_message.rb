@@ -20,7 +20,7 @@ module GitTracker
 
       message = CommitMessage.new(file)
       exit if message.mentions_story?(story)
-      message.append!("[##{story}]")
+      message.append("[##{story}]")
     end
 
     private

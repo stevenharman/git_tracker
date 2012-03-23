@@ -45,7 +45,7 @@ describe GitTracker::PrepareCommitMessage do
 
       it "exits without updating the commit message" do
         lambda { hook.run }.should raise_exception(SystemExit)
-        GitTracker::CommitMessage.should_not have_received(:append!)
+        GitTracker::CommitMessage.should_not have_received(:append)
       end
     end
 
@@ -57,7 +57,7 @@ describe GitTracker::PrepareCommitMessage do
       end
 
       it "appends the number to the commit message" do
-        commit_message.should_receive(:append!).with("[#8675309]")
+        commit_message.should_receive(:append).with("[#8675309]")
         hook.run
       end
 
@@ -68,7 +68,7 @@ describe GitTracker::PrepareCommitMessage do
 
         it "exits without updating the commit message" do
           lambda { hook.run }.should raise_exception(SystemExit)
-          GitTracker::CommitMessage.should_not have_received(:append!)
+          GitTracker::CommitMessage.should_not have_received(:append)
         end
       end
     end
