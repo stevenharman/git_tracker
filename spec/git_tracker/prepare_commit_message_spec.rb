@@ -4,14 +4,14 @@ describe GitTracker::PrepareCommitMessage do
   subject { GitTracker::PrepareCommitMessage }
 
   describe '.run' do
-    let(:hook) { stub("PrepareCommitMessage").as_null_object }
+    let(:hook) { stub("PrepareCommitMessage") }
     before do
       subject.stub(:new) { hook }
     end
 
     it "runs the hook" do
+      hook.should_receive(:run)
       subject.run("FILE1", "hook_source", "sha1234")
-      hook.should have_received(:run)
     end
   end
 

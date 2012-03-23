@@ -13,8 +13,8 @@ describe GitTracker::Branch do
     end
 
     it "shells out to git, looking for the current HEAD" do
+      subject.should_receive('`').with('git symbolic-ref HEAD')
       subject.story_number
-      subject.should have_received('`').with('git symbolic-ref HEAD')
     end
 
     it "finds the story" do
