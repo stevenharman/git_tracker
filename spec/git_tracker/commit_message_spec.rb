@@ -75,7 +75,7 @@ describe GitTracker::CommitMessage do
   end
 
   describe "#append" do
-    let(:fake_file) { stub("File", write: 1) }
+    let(:fake_file) { GitTracker::FakeFile.new }
     before do
       File.stub(:open).and_yield(fake_file)
     end
@@ -85,43 +85,43 @@ describe GitTracker::CommitMessage do
 
     it "handles no existing message" do
       stub_original_commit_message("\n\n# some other comments\n")
-      new_message = <<-COMMIT_MESSAGE
+      subject.append("[#8675309]")
+
+      fake_file.content.should ==
+        <<-COMMIT_MESSAGE
 
 
 [#8675309]
 # some other comments
-COMMIT_MESSAGE
-
-      subject.append("[#8675309]").should == new_message
-      fake_file.should have_received(:write).with(new_message)
+      COMMIT_MESSAGE
     end
 
     it "preserves existing messages" do
-      stub_original_commit_message("Add a first line\n\nWith some more crap here\n# some other comments\n")
-      new_message = <<-COMMIT_MESSAGE
-Add a first line
+      stub_original_commit_message("A first line\n\nWith more here\n# other comments\n")
+      subject.append("[#8675309]")
 
-With some more crap here
+      fake_file.content.should == <<-COMMIT_MESSAGE
+A first line
+
+With more here
 
 [#8675309]
-# some other comments
-COMMIT_MESSAGE
-
-      subject.append("[#8675309]").should == new_message
-      fake_file.should have_received(:write).with(new_message)
+# other comments
+      COMMIT_MESSAGE
     end
 
     it "preserves line breaks in comments" do
       stub_original_commit_message("# comment #1\n# comment B\n# comment III")
-      new_message = <<-COMMIT_MESSAGE
+      subject.append("[#8675309]")
+
+      fake_file.content.should == <<-COMMIT_MESSAGE
 
 
 [#8675309]
 # comment #1
 # comment B
 # comment III
-COMMIT_MESSAGE
-      subject.append("[#8675309]").should == new_message
+      COMMIT_MESSAGE
     end
   end
 
