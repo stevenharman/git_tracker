@@ -1,5 +1,6 @@
 require 'git_tracker/commit_message'
 require 'commit_message_helper'
+require 'active_support/core_ext/string/strip'
 
 describe GitTracker::CommitMessage do
   include CommitMessageHelper
@@ -87,12 +88,11 @@ describe GitTracker::CommitMessage do
       stub_original_commit_message("\n\n# some other comments\n")
       subject.append("[#8675309]")
 
-      fake_file.content.should ==
-        <<-COMMIT_MESSAGE
+      fake_file.content.should == <<-COMMIT_MESSAGE.strip_heredoc
 
 
-[#8675309]
-# some other comments
+        [#8675309]
+        # some other comments
       COMMIT_MESSAGE
     end
 
@@ -100,13 +100,13 @@ describe GitTracker::CommitMessage do
       stub_original_commit_message("A first line\n\nWith more here\n# other comments\n")
       subject.append("[#8675309]")
 
-      fake_file.content.should == <<-COMMIT_MESSAGE
-A first line
+      fake_file.content.should == <<-COMMIT_MESSAGE.strip_heredoc
+        A first line
 
-With more here
+        With more here
 
-[#8675309]
-# other comments
+        [#8675309]
+        # other comments
       COMMIT_MESSAGE
     end
 
@@ -114,13 +114,13 @@ With more here
       stub_original_commit_message("# comment #1\n# comment B\n# comment III")
       subject.append("[#8675309]")
 
-      fake_file.content.should == <<-COMMIT_MESSAGE
+      fake_file.content.should == <<-COMMIT_MESSAGE.strip_heredoc
 
 
-[#8675309]
-# comment #1
-# comment B
-# comment III
+        [#8675309]
+        # comment #1
+        # comment B
+        # comment III
       COMMIT_MESSAGE
     end
   end
