@@ -110,6 +110,19 @@ COMMIT_MESSAGE
       subject.append("[#8675309]").should == new_message
       fake_file.should have_received(:write).with(new_message)
     end
+
+    it "preserves line breaks in comments" do
+      stub_original_commit_message("# comment #1\n# comment B\n# comment III")
+      new_message = <<-COMMIT_MESSAGE
+
+
+[#8675309]
+# comment #1
+# comment B
+# comment III
+COMMIT_MESSAGE
+      subject.append("[#8675309]").should == new_message
+    end
   end
 
 end

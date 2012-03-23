@@ -24,8 +24,8 @@ module GitTracker
     def parse(message)
       lines = message.split($/)
       body = lines.take_while { |line| !line.start_with?("#") }
-      postscript = lines.slice(body.length..-1).join
-      [body.join("\n"), postscript]
+      postscript = lines.slice(body.length..-1)
+      [body.join("\n"), postscript.join("\n")]
     end
 
     def format_message(preamble, text, postscript)
