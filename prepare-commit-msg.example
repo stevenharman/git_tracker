@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-git-tracker "$@"
+git-tracker prepare-commit-msg "$@"
 
