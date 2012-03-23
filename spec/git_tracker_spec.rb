@@ -12,7 +12,7 @@ describe GitTracker do
     # TODO: stop the abort from writing to stderr during tests?
     it "doesn't run hooks we don't know about" do
       lambda { GitTracker.execute('non-existent-hook', *args) }.
-        should raise_error SystemExit, "git-tracker non-existent-hook does not exist."
+        should raise_error SystemExit, "[git_tracker] hook: 'non-existent-hook' does not exist."
     end
   end
 

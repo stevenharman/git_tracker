@@ -4,7 +4,7 @@ require "git_tracker/prepare_commit_message"
 module GitTracker
   def self.execute(hook, *args)
     hook_name = hook.gsub(/-/, '_')
-    abort("git-tracker #{hook} does not exist.") unless respond_to?(hook_name)
+    abort("[git_tracker] hook: '#{hook}' does not exist.") unless respond_to?(hook_name)
     send(hook_name, *args)
   end
 
