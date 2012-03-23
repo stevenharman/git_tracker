@@ -6,7 +6,7 @@ module GitTracker
     attr_reader :file, :source, :commit_sha
 
     def self.run(file, source=nil, commit_sha=nil)
-      new(file, source, commit_sha)
+      new(file, source, commit_sha).run
     end
 
     def initialize(file, source=nil, commit_sha=nil)

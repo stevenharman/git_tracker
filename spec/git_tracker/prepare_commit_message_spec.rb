@@ -1,16 +1,21 @@
 require 'git_tracker/prepare_commit_message'
 
 describe GitTracker::PrepareCommitMessage do
+  subject { GitTracker::PrepareCommitMessage }
 
   describe '.run' do
-    it "creates a new PrepareCommitMessage object" do
-      GitTracker::PrepareCommitMessage.run("FILE1", "hook_source", "sha1234").
-        should be_a(GitTracker::PrepareCommitMessage)
+    let(:hook) { stub("PrepareCommitMessage").as_null_object }
+    before do
+      subject.stub(:new) { hook }
+    end
+
+    it "runs the hook" do
+      subject.run("FILE1", "hook_source", "sha1234")
+      hook.should have_received(:run)
     end
   end
 
   describe ".new" do
-    subject { GitTracker::PrepareCommitMessage }
 
     it "requires the name of the commit message file" do
       lambda { subject.new }.should raise_error(ArgumentError)
