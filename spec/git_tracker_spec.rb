@@ -28,4 +28,11 @@ describe GitTracker do
     end
   end
 
+  describe ".install" do
+    it 'tells the hook to install itself' do
+      GitTracker::Hook.should_receive(:install)
+      subject.install
+    end
+  end
+
 end

@@ -1,5 +1,6 @@
-require "git_tracker/version"
+require "git_tracker/hook"
 require "git_tracker/prepare_commit_message"
+require "git_tracker/version"
 
 module GitTracker
   def self.execute(cmd_arg, *args)
@@ -10,5 +11,9 @@ module GitTracker
 
   def self.prepare_commit_msg(*args)
     PrepareCommitMessage.run(*args)
+  end
+
+  def self.install
+    Hook.install
   end
 end
