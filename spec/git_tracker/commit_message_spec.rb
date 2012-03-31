@@ -1,5 +1,5 @@
+require 'spec_helper'
 require 'git_tracker/commit_message'
-require 'commit_message_helper'
 require 'active_support/core_ext/string/strip'
 
 describe GitTracker::CommitMessage do
