@@ -1,13 +1,13 @@
 # GitTracker
 
-`GitTracker`, or `git-tracker`, is a Git hook that will scan your current
+*GitTracker*, or *git-tracker*, is a Git hook that will scan your current
 branch number looking for something it recognizes as a [Pivotal Tracker][pt]
 story number. If it finds one, it will automagically add it, in the [special
 format][pt-format], to your commit message.
 
 ## Installation
 
-You need to get the `git-tracker` executable on your system. Options:
+You need to get the `git-tracker` executable on your system.
 
 ### RubyGems
 
@@ -46,7 +46,7 @@ branch name and prepare your commit message so that it include the story number
 in the special Pivotal Tracker syntax.
 
 ```bash
-# on branch named `best_feature_ever-#123456`
+# on branch named `best_feature_ever-#8675309`
 $ git commit
 ```
 
@@ -55,10 +55,10 @@ Will result in a commit message something like:
 ```diff
 
 
-[#123456]
+[#8675309]
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-# On branch best_feature_ever-#123456
+# On branch best_feature_ever-#8675309
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
@@ -75,22 +75,22 @@ If you pass a commit message on the command line the hook will still add the
 story number, preceded by an empty line, to the end of your message.
 
 ```
-# on branch named `best_feature_ever-#123456`
+# on branch named `best_feature_ever-#8675309`
 $ git commit -m'Look at this rad code, yo!'
 
 # results in this commit message:
 #
 # Look at this rad code, yo!
 #
-# [#123456]
+# [#8675309]
 ```
 
 However, if you include the story number in the Pivotal Tracker format in your
 commit message, the hook will do nothing.
 
 ```
-# on branch named `best_feature_ever-#123456`
-$ git commit -m'[#123456] Look at this rad code, yo!'
+# on branch named `best_feature_ever-#8675309`
+$ git commit -m'[#8675309] Look at this rad code, yo!'
 
 # results in this commit message:
 #
