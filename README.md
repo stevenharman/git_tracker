@@ -1,29 +1,111 @@
 # GitTracker
 
-TODO: Write a gem description
+`GitTracker`, or `git-tracker`, is a Git hook that will scan your current
+branch number looking for something it recognizes as a [Pivotal Tracker][pt]
+story number. If it finds one, it will automagically add it, in the [special
+format][pt-format], to your commit message.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+You need to get the `git-tracker` executable on your system. Options:
 
-    gem 'git_tracker'
+### RubyGems
 
-And then execute:
+Currently, this is the only option, but I plan to have a standalone version
+ready soon.
 
-    $ bundle
+```bash
+$ gem install git_tracker
+```
 
-Or install it yourself as:
+Once you have the `git-tracker` executable on your system you need to install
+the hook into your local Git repository.
 
-    $ gem install git_tracker
+```bash
+# from inside a local Git repository
+$ git-tracker install
+```
+
+This will put the `prepare-commit-msg` hook in the `/path/to/repo/.git/hooks`
+directory and make it executable.
+
+**NOTE:** This will need to be done for each repository that you wish to use
+the hook.
 
 ## Usage
 
-TODO: Write usage instructions here
+With the hook installed in a repository, create branches being sure to include
+the Pivotal Tracker story number in the branch name.
 
-## Contributing
+```bash
+$ git checkout -b a_useful_and_helpful_name_#8675309
+```
+
+When you commit, Git will fire the hook which will find the story number in the
+branch name and prepare your commit message so that it include the story number
+in the special Pivotal Tracker syntax.
+
+```bash
+# on branch named `best_feature_ever-#123456`
+$ git commit
+```
+
+Will result in a commit message something like:
+
+```diff
+
+
+[#123456]
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch best_feature_ever-#123456
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+# new file:   feature.rb
+#
+
+```
+
+You should then add a [useful and responsible commit message][tpope]. :heart:
+
+### Passing commit messages via command line
+
+If you pass a commit message on the command line the hook will still add the
+story number, preceded by an empty line, to the end of your message.
+
+```
+# on branch named `best_feature_ever-#123456`
+$ git commit -m'Look at this rad code, yo!'
+
+# results in this commit message:
+#
+# Look at this rad code, yo!
+#
+# [#123456]
+```
+
+However, if you include the story number in the Pivotal Tracker format in your
+commit message, the hook will do nothing.
+
+```
+# on branch named `best_feature_ever-#123456`
+$ git commit -m'[#123456] Look at this rad code, yo!'
+
+# results in this commit message:
+#
+# [#12356] Look at this rad code, yo!
+```
+
+## Contributing :octocat:
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+
+[pt]: https://www.pivotaltracker.com/
+[pt-format]: https://www.pivotaltracker.com/help/api?version=v3#scm_post_commit_message_syntax
+[tpope]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
