@@ -50,7 +50,8 @@ in the special Pivotal Tracker syntax.
 $ git commit
 ```
 
-Will result in a commit message something like:
+Will result in a commit message something like: *(notice the two empty lines at
+the top)*
 
 ```diff
 
@@ -74,27 +75,32 @@ You should then add a [useful and responsible commit message][tpope]. :heart:
 If you pass a commit message on the command line the hook will still add the
 story number, preceded by an empty line, to the end of your message.
 
-```
+```bash
 # on branch named `best_feature_ever-#8675309`
 $ git commit -m'Look at this rad code, yo!'
+```
 
-# results in this commit message:
-#
-# Look at this rad code, yo!
-#
-# [#8675309]
+Results in this commit message:
+
+```
+Look at this rad code, yo!
+
+[#8675309]
 ```
 
 However, if you include the story number in the Pivotal Tracker format in your
 commit message, the hook will do nothing.
 
-```
+```bash
 # on branch named `best_feature_ever-#8675309`
 $ git commit -m'[#8675309] Look at this rad code, yo!'
+```
 
-# results in this commit message:
-#
-# [#12356] Look at this rad code, yo!
+Results in this commit message:
+
+
+```
+[#12356] Look at this rad code, yo!
 ```
 
 ## Contributing :octocat:
