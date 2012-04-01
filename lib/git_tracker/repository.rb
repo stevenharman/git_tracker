@@ -1,4 +1,4 @@
-require 'english'
+require 'English'
 
 module GitTracker
   module Repository
