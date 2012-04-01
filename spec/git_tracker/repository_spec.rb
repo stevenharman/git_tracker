@@ -6,6 +6,7 @@ describe GitTracker::Repository do
   describe '.root' do
     let(:git_command) { 'git rev-parse --show-toplevel' }
     before do
+      allow_message_expectations_on_nil
       subject.stub(:`).with(git_command) { "/path/to/git/repo/root\n" }
       $?.stub(:exitstatus) { 0 }
     end
