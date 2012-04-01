@@ -1,7 +1,7 @@
 # GitTracker
 
 *GitTracker*, or *git-tracker*, is a Git hook that will scan your current
-branch number looking for something it recognizes as a [Pivotal Tracker][pt]
+branch name looking for something it recognizes as a [Pivotal Tracker][pt]
 story number. If it finds one, it will automagically add it, in the [special
 format][pt-format], to your commit message.
 
