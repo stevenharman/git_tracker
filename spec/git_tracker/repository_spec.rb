@@ -7,6 +7,7 @@ describe GitTracker::Repository do
     let(:git_command) { 'git rev-parse --show-toplevel' }
     before do
       subject.stub(:`).with(git_command) { "/path/to/git/repo/root\n" }
+      $?.stub(:exitstatus) { 0 }
     end
 
     it "gets the path to the local Repository's top-level directory" do
