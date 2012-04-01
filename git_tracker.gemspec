@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
     better... and easier... um, besier!
   EOF
 
-  gem.add_development_dependency "rspec", "~> 2.0"
+  gem.add_development_dependency "rspec", "~> 2.9.0"
   gem.add_development_dependency "rspec-spies", "~> 2.0"
   gem.add_development_dependency "pry", "~> 0.9.8"
   gem.add_development_dependency "activesupport", "~> 3.2"
