@@ -4,6 +4,7 @@ describe GitTracker::Branch do
   subject { described_class }
 
   def stub_branch(ref, exit_status = 0)
+    allow_message_expectations_on_nil
     subject.stub(:`) { ref }
     $?.stub(:exitstatus) { exit_status }
   end
