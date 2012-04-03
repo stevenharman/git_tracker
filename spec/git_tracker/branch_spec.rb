@@ -34,6 +34,11 @@ describe GitTracker::Branch do
         stub_branch('refs/heads/a_very_descriptive_name_1235309')
         subject.story_number.should == '1235309'
       end
+
+      it "finds the story following a forward hash" do
+        stub_branch('refs/heads/alindeman/8675309_got_her_number')
+        subject.story_number.should == '8675309'
+      end
     end
 
     context "The current branch doesn't have a story number" do
