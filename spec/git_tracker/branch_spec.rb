@@ -3,8 +3,17 @@ require 'git_tracker/branch'
 describe GitTracker::Branch do
   subject { described_class }
 
-  def stub_branch(ref)
-    subject.stub('`') { ref }
+  def stub_branch(ref, exit_status = 0)
+    subject.stub(:`) { ref }
+    $?.stub(:exitstatus) { exit_status }
+  end
+
+  context 'not in a Git repository' do
+    it 'aborts with non-zero exit status' do
+      stub_branch(nil, 128)
+
+      -> { subject.current }.should raise_error SystemExit
+    end
   end
 
   context "Current branch has a story number" do
