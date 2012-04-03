@@ -3,7 +3,7 @@ require 'English'
 module GitTracker
   module Branch
     def self.story_number
-      current[/#(?<number>\d+)/, :number]
+      current[/#?(?<number>\d+)/, :number]
     end
 
     def self.current

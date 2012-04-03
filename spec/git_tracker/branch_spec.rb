@@ -32,6 +32,21 @@ describe GitTracker::Branch do
     end
   end
 
+  context "Current branch has a story number without the hash '#'" do
+    before do
+      stub_branch('refs/heads/a_very_descriptive_name_1235309')
+    end
+
+    it "shells out to git, looking for the current HEAD" do
+      subject.should_receive('`').with('git symbolic-ref HEAD')
+      subject.story_number
+    end
+
+    it "finds the story" do
+      subject.story_number.should == '1235309'
+    end
+  end
+
   context "The current branch doesn't have a story number" do
     it "finds no story" do
       stub_branch('refs/heads/a_very_descriptive_name_without_a_#number')
