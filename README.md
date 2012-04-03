@@ -70,6 +70,18 @@ the top)*
 
 You should then add a [useful and responsible commit message][tpope]. :heart:
 
+### Valid branch names
+
+*git_tracker* allows you to include the story number any where in the branch
+name, optionally prefixing it with a hash (`#`). Examples:
+
+  - `best_feature_ever_#8675309`
+  - `best_feature_ever_8675309`
+  - `8675309_best_feature_ever`
+  - `#8675309_best_feature_ever`
+  - `your_name/8675309_best_feature_ever`
+  - `your_name/#8675309_best_feature_ever`
+
 ### Passing commit messages via command line
 
 If you pass a commit message on the command line the hook will still add the
