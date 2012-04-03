@@ -9,55 +9,45 @@ describe GitTracker::Branch do
     $?.stub(:exitstatus) { exit_status }
   end
 
-  context 'not in a Git repository' do
-    it 'aborts with non-zero exit status' do
+  describe '.current' do
+    it 'shells out to git, looking for the current HEAD' do
+      stub_branch('refs/heads/herpty_derp_de')
+      subject.should_receive('`').with('git symbolic-ref HEAD')
+      subject.current
+    end
+
+    it 'aborts with non-zero exit status when not in a Git repository' do
       stub_branch(nil, 128)
 
       -> { subject.current }.should raise_error SystemExit
     end
   end
 
-  context "Current branch has a story number" do
-    before do
-      stub_branch('refs/heads/a_very_descriptive_name_#8675309')
+  describe '.story_number' do
+    context "Current branch has a story number" do
+      it "finds the story that starts with a hash" do
+        stub_branch('refs/heads/a_very_descriptive_name_#8675309')
+        subject.story_number.should == '8675309'
+      end
+
+      it "finds the story without a leading hash" do
+        stub_branch('refs/heads/a_very_descriptive_name_1235309')
+        subject.story_number.should == '1235309'
+      end
     end
 
-    it "shells out to git, looking for the current HEAD" do
-      subject.should_receive('`').with('git symbolic-ref HEAD')
-      subject.story_number
+    context "The current branch doesn't have a story number" do
+      it "finds no story" do
+        stub_branch('refs/heads/a_very_descriptive_name_without_a_#number')
+        subject.story_number.should_not be
+      end
     end
 
-    it "finds the story" do
-      subject.story_number.should == '8675309'
-    end
-  end
-
-  context "Current branch has a story number without the hash '#'" do
-    before do
-      stub_branch('refs/heads/a_very_descriptive_name_1235309')
-    end
-
-    it "shells out to git, looking for the current HEAD" do
-      subject.should_receive('`').with('git symbolic-ref HEAD')
-      subject.story_number
-    end
-
-    it "finds the story" do
-      subject.story_number.should == '1235309'
-    end
-  end
-
-  context "The current branch doesn't have a story number" do
-    it "finds no story" do
-      stub_branch('refs/heads/a_very_descriptive_name_without_a_#number')
-      subject.story_number.should_not be
-    end
-  end
-
-  context "Not on a branch (HEAD doesn't exist)" do
-    it "finds no story" do
-      stub_branch('')
-      subject.story_number.should_not be
+    context "Not on a branch (HEAD doesn't exist)" do
+      it "finds no story" do
+        stub_branch('')
+        subject.story_number.should_not be
+      end
     end
   end
 end
