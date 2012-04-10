@@ -16,15 +16,20 @@ module GitTracker
     end
 
     def run
-      exit if source == 'commit'
-      story = story_number_from_branch
+      exit_when_commit_exists
 
+      story = story_number_from_branch
       message = CommitMessage.new(file)
       exit if message.mentions_story?(story)
+
       message.append("[##{story}]")
     end
 
     private
+
+    def exit_when_commit_exists
+      exit if source == 'commit'
+    end
 
     def story_number_from_branch
       story = Branch.story_number
