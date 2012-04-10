@@ -40,6 +40,17 @@ describe GitTracker::PrepareCommitMessage do
       GitTracker::Branch.stub(:story_number) { story }
     end
 
+    context 'with an existing commit (via `-c`, `-C`, or `--amend` options)' do
+      let(:hook) { described_class.new('FILE2', 'commit', '60a086f3') }
+
+      it 'exits with status code 0' do
+        expect { hook.run }.to raise_exception { |e|
+          e.should be_a SystemExit
+          e.status.should == 0
+        }
+      end
+    end
+
     context "branch name without a Pivotal Tracker story number" do
       let(:story) { nil }
 

@@ -16,6 +16,7 @@ module GitTracker
     end
 
     def run
+      exit if source == 'commit'
       story = story_number_from_branch
 
       message = CommitMessage.new(file)
