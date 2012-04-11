@@ -20,7 +20,7 @@ describe GitTracker::Branch do
     it 'aborts with non-zero exit status when not in a Git repository' do
       stub_branch(nil, 128)
 
-      -> { subject.current }.should_not succeed
+      lambda { subject.current }.should_not succeed
     end
   end
 

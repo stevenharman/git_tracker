@@ -9,7 +9,7 @@ describe GitTracker::CommitMessage do
   let(:file) { "COMMIT_EDITMSG" }
 
   it "requires path to the temporary commit message file" do
-    -> { GitTracker::CommitMessage.new }.should raise_error ArgumentError
+    lambda { GitTracker::CommitMessage.new }.should raise_error ArgumentError
   end
 
   describe "#mentions_story?" do

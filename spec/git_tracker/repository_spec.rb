@@ -18,7 +18,7 @@ describe GitTracker::Repository do
 
     it 'aborts when not in a git repository' do
       $?.stub(:exitstatus) { 128 }
-      -> { subject.root }.should_not succeed
+      lambda { subject.root }.should_not succeed
     end
   end
 
