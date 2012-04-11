@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'git_tracker/prepare_commit_message'
 
 describe GitTracker::PrepareCommitMessage do
@@ -44,10 +45,7 @@ describe GitTracker::PrepareCommitMessage do
       let(:hook) { described_class.new('FILE2', 'commit', '60a086f3') }
 
       it 'exits with status code 0' do
-        expect { hook.run }.to raise_exception { |e|
-          e.should be_a SystemExit
-          e.status.should == 0
-        }
+        lambda { hook.run }.should succeed
       end
     end
 
