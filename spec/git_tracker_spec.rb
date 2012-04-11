@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'git_tracker'
 
 describe GitTracker do
@@ -16,8 +17,7 @@ describe GitTracker do
 
     # TODO: stop the abort from writing to stderr during tests?
     it "doesn't run hooks we don't know about" do
-      lambda { subject.execute('non-existent-hook', *args) }.
-        should raise_error SystemExit, "[git_tracker] command: 'non-existent-hook' does not exist."
+      lambda { subject.execute('non-existent-hook', *args) }.should_not succeed
     end
   end
 
