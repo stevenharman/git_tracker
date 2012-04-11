@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'git_tracker/repository'
 
 describe GitTracker::Repository do
@@ -17,7 +18,7 @@ describe GitTracker::Repository do
 
     it 'aborts when not in a git repository' do
       $?.stub(:exitstatus) { 128 }
-      -> { subject.root }.should raise_error SystemExit
+      -> { subject.root }.should_not succeed
     end
   end
 

@@ -53,7 +53,7 @@ describe GitTracker::PrepareCommitMessage do
       let(:story) { nil }
 
       it "exits without updating the commit message" do
-        lambda { hook.run }.should raise_exception(SystemExit)
+        lambda { hook.run }.should succeed
         GitTracker::CommitMessage.should_not have_received(:append)
       end
     end
@@ -76,7 +76,7 @@ describe GitTracker::PrepareCommitMessage do
         end
 
         it "exits without updating the commit message" do
-          lambda { hook.run }.should raise_exception(SystemExit)
+          lambda { hook.run }.should succeed
           GitTracker::CommitMessage.should_not have_received(:append)
         end
       end

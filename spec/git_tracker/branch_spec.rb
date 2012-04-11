@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'git_tracker/branch'
 
 describe GitTracker::Branch do
@@ -19,7 +20,7 @@ describe GitTracker::Branch do
     it 'aborts with non-zero exit status when not in a Git repository' do
       stub_branch(nil, 128)
 
-      -> { subject.current }.should raise_error SystemExit
+      -> { subject.current }.should_not succeed
     end
   end
 
