@@ -39,11 +39,7 @@ describe GitTracker::CommitMessage do
         stub_commit_message("[Fixes]")
         subject.should be_mentions_keyword
       end
-
-
-
     end
-
   end
 
   describe "#mentions_story?" do
@@ -154,5 +150,4 @@ describe GitTracker::CommitMessage do
       COMMIT_MESSAGE
     end
   end
-
 end
