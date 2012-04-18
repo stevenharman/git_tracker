@@ -19,26 +19,12 @@ describe GitTracker::CommitMessage do
   describe "#keyword" do
     it "should return the correct keyword" do
       stub_commit_message("[Delivers]")
-      subject.keyword.should eq("Delivers")
+      subject.keyword.should == "Delivers"
     end
 
     it "should return nil when there no keyword matching" do
       stub_commit_message("[Something]")
       subject.keyword.should be_nil
-    end
-  end
-
-  describe "#mentions_keyword?" do
-    context "commit message contains pivotal tracker keywords, but not with the special syntax" do
-      it "allows just the Delivers keyword" do
-        stub_commit_message("[Delivers]")
-        subject.should be_mentions_keyword
-      end
-
-      it "allows just the Fixes keyword" do
-        stub_commit_message("[Fixes]")
-        subject.should be_mentions_keyword
-      end
     end
   end
 

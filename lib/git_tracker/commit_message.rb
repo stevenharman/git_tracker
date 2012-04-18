@@ -10,10 +10,6 @@ module GitTracker
       @message =~ /^(?!#).*\[(\w+\s)?(#\d+\s)*##{number}(\s#\d+)*(\s\w+)?\]/io
     end
 
-    def mentions_keyword?
-      @message =~ /\[(Delivers|Fixes)\]/
-    end
-
     def keyword
       @message =~ /\[(Delivers|Fixes)\]/
       $1
