@@ -76,6 +76,7 @@ The keywords are [Delivers] and [Fixes]
 If you use those keywords in your commit message, the keyword will be prepended to the story ID in the commit message.
 
 For example:
+
 ```bash
 # on branch named `bug/redis_connection_not_initializing_#8675309`
 $ git commit -am "changed the redis connection string [Fixes]"
