@@ -68,6 +68,37 @@ the top)*
 
 ```
 
+## Keywords
+You can use the custom keywords that Pivotal Tracker provide with the API.
+
+The keywords are [Delivers] and [Fixes]
+
+If you use those keywords in your commit message, the keyword will be prepended to the story ID in the commit message.
+
+For example:
+```bash
+# on branch named `bug/redis_connection_not_initializing_#8675309`
+$ git commit -am "changed the redis connection string [Fixes]"
+```
+
+Will result in a commit message something like: *(notice the two empty lines at
+the top)*
+
+```diff
+
+
+[Fixes #8675309]
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch best_feature_ever-#8675309
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+# new file:   config/redis_connection.rb
+#
+
+```
+
 You should then add a [useful and responsible commit message][tpope]. :heart:
 
 ### Valid branch names
