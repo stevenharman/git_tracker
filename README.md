@@ -82,22 +82,10 @@ For example:
 $ git commit -am "changed the redis connection string [Fixes]"
 ```
 
-Will result in a commit message something like: *(notice the two empty lines at
-the top)*
+Will result in a this being appended to the commit message
 
-```diff
-
-
+```bash
 [Fixes #8675309]
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored, and an empty message aborts the commit.
-# On branch best_feature_ever-#8675309
-# Changes to be committed:
-#   (use "git reset HEAD <file>..." to unstage)
-#
-# new file:   config/redis_connection.rb
-#
-
 ```
 
 You should then add a [useful and responsible commit message][tpope]. :heart:
