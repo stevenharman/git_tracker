@@ -12,11 +12,41 @@ describe GitTracker::CommitMessage do
     lambda { GitTracker::CommitMessage.new }.should raise_error ArgumentError
   end
 
-  describe "#mentions_story?" do
-    def stub_commit_message(story_text)
-      File.stub(:read).with(file) { example_commit_message(story_text) }
+  def stub_commit_message(story_text)
+    File.stub(:read).with(file) { example_commit_message(story_text) }
+  end
+
+  describe "#keyword" do
+    it "should return the correct keyword" do
+      stub_commit_message("[Delivers]")
+      subject.keyword.should eq("Delivers")
     end
 
+    it "should return nil when there no keyword matching" do
+      stub_commit_message("[Something]")
+      subject.keyword.should be_nil
+    end
+  end
+
+  describe "#mentions_keyword?" do
+    context "commit message contains pivotal tracker keywords, but not with the special syntax" do
+      it "allows just the Delivers keyword" do
+        stub_commit_message("[Delivers]")
+        subject.should be_mentions_keyword
+      end
+
+      it "allows just the Fixes keyword" do
+        stub_commit_message("[Fixes]")
+        subject.should be_mentions_keyword
+      end
+
+
+
+    end
+
+  end
+
+  describe "#mentions_story?" do
     context "commit message contains the special Pivotal Tracker story syntax" do
       it "allows just the number" do
         stub_commit_message("[#8675309]")

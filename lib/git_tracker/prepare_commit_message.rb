@@ -21,8 +21,10 @@ module GitTracker
       story = story_number_from_branch
       message = CommitMessage.new(file)
       exit if message.mentions_story?(story)
+      keyword = message.keyword
 
-      message.append("[##{story}]")
+      message_addition = [keyword, "##{story}"].compact.join(" ")
+      message.append("[#{message_addition}]")
     end
 
     private

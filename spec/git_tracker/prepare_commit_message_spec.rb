@@ -61,13 +61,27 @@ describe GitTracker::PrepareCommitMessage do
     context "branch name with a Pivotal Tracker story number" do
       let(:story) { "8675309" }
       let(:commit_message) { stub("CommitMessage", mentions_story?: false) }
+
       before do
+        commit_message.stub(:keyword) { nil }
         GitTracker::CommitMessage.stub(:new) { commit_message }
       end
 
       it "appends the number to the commit message" do
         commit_message.should_receive(:append).with("[#8675309]")
         hook.run
+      end
+
+      context "keyword mentioned in the commit message" do
+        before do
+          commit_message.stub(:mentions_story?).with("8675309") { false }
+          commit_message.stub(:keyword) { "Delivers" }
+        end
+
+        it "appends the keyword and the story number" do
+          commit_message.should_receive(:append).with("[Delivers #8675309]")
+          hook.run 
+        end
       end
 
       context "number already mentioned in the commit message" do
