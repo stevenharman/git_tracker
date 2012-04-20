@@ -14,7 +14,7 @@ RSpec::Matchers.define :succeed do
 
   failure_message_for_should do |block|
     "expected block to call exit(#{successful_exit_code}) but exit" +
-      (actual.nil? ? " not called" : "(#{actual}) was called")
+      (actual.nil? ? ' not called' : "(#{actual}) was called")
   end
 
   failure_message_for_should_not do |block|

@@ -5,38 +5,38 @@ describe GitTracker::PrepareCommitMessage do
   subject { GitTracker::PrepareCommitMessage }
 
   describe '.run' do
-    let(:hook) { stub("PrepareCommitMessage") }
+    let(:hook) { stub('PrepareCommitMessage') }
     before do
       subject.stub(:new) { hook }
     end
 
-    it "runs the hook" do
+    it 'runs the hook' do
       hook.should_receive(:run)
-      subject.run("FILE1", "hook_source", "sha1234")
+      subject.run('FILE1', 'hook_source', 'sha1234')
     end
   end
 
-  describe ".new" do
+  describe '.new' do
 
-    it "requires the name of the commit message file" do
+    it 'requires the name of the commit message file' do
       lambda { subject.new }.should raise_error(ArgumentError)
     end
 
-    it "remembers the name of the commit message file" do
-      subject.new("FILE1").file.should == "FILE1"
+    it 'remembers the name of the commit message file' do
+      subject.new('FILE1').file.should == 'FILE1'
     end
 
-    it "optionally accepts a message source" do
-      hook = subject.new("FILE1", "merge").source.should == "merge"
+    it 'optionally accepts a message source' do
+      hook = subject.new('FILE1', 'merge').source.should == 'merge'
     end
 
-    it "optionally accepts the SHA-1 of a commit" do
-      hook = subject.new("FILE1", "commit", "abc1234").commit_sha.should == "abc1234"
+    it 'optionally accepts the SHA-1 of a commit' do
+      hook = subject.new('FILE1', 'commit', 'abc1234').commit_sha.should == 'abc1234'
     end
   end
 
   describe '#run' do
-    let(:hook) { GitTracker::PrepareCommitMessage.new("FILE1") }
+    let(:hook) { GitTracker::PrepareCommitMessage.new('FILE1') }
     before do
       GitTracker::Branch.stub(:story_number) { story }
     end
@@ -49,47 +49,47 @@ describe GitTracker::PrepareCommitMessage do
       end
     end
 
-    context "branch name without a Pivotal Tracker story number" do
+    context 'branch name without a Pivotal Tracker story number' do
       let(:story) { nil }
 
-      it "exits without updating the commit message" do
+      it 'exits without updating the commit message' do
         lambda { hook.run }.should succeed
         GitTracker::CommitMessage.should_not have_received(:append)
       end
     end
 
-    context "branch name with a Pivotal Tracker story number" do
-      let(:story) { "8675309" }
-      let(:commit_message) { stub("CommitMessage", mentions_story?: false) }
+    context 'branch name with a Pivotal Tracker story number' do
+      let(:story) { '8675309' }
+      let(:commit_message) { stub('CommitMessage', mentions_story?: false) }
 
       before do
         commit_message.stub(:keyword) { nil }
         GitTracker::CommitMessage.stub(:new) { commit_message }
       end
 
-      it "appends the number to the commit message" do
-        commit_message.should_receive(:append).with("[#8675309]")
+      it 'appends the number to the commit message' do
+        commit_message.should_receive(:append).with('[#8675309]')
         hook.run
       end
 
-      context "keyword mentioned in the commit message" do
+      context 'keyword mentioned in the commit message' do
         before do
-          commit_message.stub(:mentions_story?).with("8675309") { false }
-          commit_message.stub(:keyword) { "Delivers" }
+          commit_message.stub(:mentions_story?).with('8675309') { false }
+          commit_message.stub(:keyword) { 'Delivers' }
         end
 
-        it "appends the keyword and the story number" do
-          commit_message.should_receive(:append).with("[Delivers #8675309]")
+        it 'appends the keyword and the story number' do
+          commit_message.should_receive(:append).with('[Delivers #8675309]')
           hook.run 
         end
       end
 
-      context "number already mentioned in the commit message" do
+      context 'number already mentioned in the commit message' do
         before do
-          commit_message.stub(:mentions_story?).with("8675309") { true }
+          commit_message.stub(:mentions_story?).with('8675309') { true }
         end
 
-        it "exits without updating the commit message" do
+        it 'exits without updating the commit message' do
           lambda { hook.run }.should succeed
           GitTracker::CommitMessage.should_not have_received(:append)
         end

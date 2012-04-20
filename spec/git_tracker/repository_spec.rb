@@ -12,7 +12,7 @@ describe GitTracker::Repository do
       $?.stub(:exitstatus) { 0 }
     end
 
-    it "gets the path to the local Repository's top-level directory" do
+    it 'gets the path to the top-level directory of the local Repository' do
       subject.root.should == '/path/to/git/repo/root'
     end
 

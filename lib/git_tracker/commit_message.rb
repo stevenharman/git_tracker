@@ -28,7 +28,7 @@ module GitTracker
 
     def parse(message)
       lines = message.split($/)
-      body = lines.take_while { |line| !line.start_with?("#") }
+      body = lines.take_while { |line| !line.start_with?('#') }
       postscript = lines.slice(body.length..-1)
       [body.join("\n"), postscript.join("\n")]
     end

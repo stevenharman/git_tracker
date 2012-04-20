@@ -23,7 +23,7 @@ module GitTracker
       exit if message.mentions_story?(story)
       keyword = message.keyword
 
-      message_addition = [keyword, "##{story}"].compact.join(" ")
+      message_addition = [keyword, "##{story}"].compact.join(' ')
       message.append("[#{message_addition}]")
     end
 
