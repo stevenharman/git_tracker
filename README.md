@@ -68,40 +68,6 @@ the top)*
 
 ```
 
-## Keywords
-You can use the custom keywords that Pivotal Tracker provide with the API.
-
-The keywords are [Delivers] and [Fixes]
-
-If you use those keywords in your commit message, the keyword will be prepended to the story ID in the commit message.
-
-For example:
-
-```bash
-# on branch named `bug/redis_connection_not_initializing_#8675309`
-$ git commit -am "changed the redis connection string [Fixes]"
-```
-
-Will result in a this being appended to the commit message
-
-```bash
-[Fixes #8675309]
-```
-
-You should then add a [useful and responsible commit message][tpope]. :heart:
-
-### Valid branch names
-
-*git_tracker* allows you to include the story number any where in the branch
-name, optionally prefixing it with a hash (`#`). Examples:
-
-  - `best_feature_ever_#8675309`
-  - `best_feature_ever_8675309`
-  - `8675309_best_feature_ever`
-  - `#8675309_best_feature_ever`
-  - `your_name/8675309_best_feature_ever`
-  - `your_name/#8675309_best_feature_ever`
-
 ### Passing commit messages via command line
 
 If you pass a commit message on the command line the hook will still add the
@@ -134,6 +100,42 @@ Results in this commit message:
 ```
 [#12356] Look at this rad code, yo!
 ```
+
+### Keywords
+You can use the custom keywords that Pivotal Tracker provide with the API.
+
+The keywords are [Delivers] and [Fixes]
+
+If you use those keywords in your commit message, the keyword will be prepended to the story ID in the commit message.
+
+For example:
+
+```bash
+# on branch named `bug/redis_connection_not_initializing_#8675309`
+$ git commit -am "changed the redis connection string [Fixes]"
+```
+
+Results in this commit message:
+
+```bash
+changed the redis connection string [Fixes]
+
+[Fixes #8675309]
+```
+
+You should then add a [useful and responsible commit message][tpope]. :heart:
+
+### Valid branch names
+
+*git_tracker* allows you to include the story number any where in the branch
+name, optionally prefixing it with a hash (`#`). Examples:
+
+  - `best_feature_ever_#8675309`
+  - `best_feature_ever_8675309`
+  - `8675309_best_feature_ever`
+  - `#8675309_best_feature_ever`
+  - `your_name/8675309_best_feature_ever`
+  - `your_name/#8675309_best_feature_ever`
 
 ## Contributing :octocat:
 
