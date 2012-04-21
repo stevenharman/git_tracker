@@ -9,9 +9,15 @@ module GitTracker
     def self.current
       branch_path = `git symbolic-ref HEAD`
 
-      abort unless $CHILD_STATUS.exitstatus == 0
+      abort unless exit_successful?
 
       branch_path[%r{refs/heads/(?<name>.+)}, :name] || ''
+    end
+
+    private
+
+    def self.exit_successful?
+      $CHILD_STATUS.exitstatus == 0
     end
   end
 end
