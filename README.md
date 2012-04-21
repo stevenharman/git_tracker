@@ -68,6 +68,8 @@ the top)*
 
 ```
 
+You should then add a [useful and responsible commit message][tpope]. :heart:
+
 ### Passing commit messages via command line
 
 If you pass a commit message on the command line the hook will still add the
@@ -122,8 +124,6 @@ changed the redis connection string [Fixes]
 
 [Fixes #8675309]
 ```
-
-You should then add a [useful and responsible commit message][tpope]. :heart:
 
 ### Valid branch names
 
