@@ -9,5 +9,9 @@ module GitTracker
       path
     end
 
+    def self.ensure_exists
+      root
+    end
+
   end
 end
