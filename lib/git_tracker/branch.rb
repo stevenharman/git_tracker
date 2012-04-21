@@ -1,4 +1,5 @@
 require 'English'
+require 'git_tracker/repository'
 
 module GitTracker
   module Branch
@@ -9,7 +10,7 @@ module GitTracker
     def self.current
       branch_path = `git symbolic-ref HEAD`
 
-      abort unless exit_successful?
+      Repository.ensure_exists unless exit_successful?
 
       branch_path[%r{refs/heads/(?<name>.+)}, :name] || ''
     end

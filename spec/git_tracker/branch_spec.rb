@@ -17,10 +17,11 @@ describe GitTracker::Branch do
       subject.current
     end
 
-    it 'aborts with non-zero exit status when not in a Git repository' do
-      stub_branch(nil, 128)
+    it 'ensures in a Git repository when looking for HEAD exits with non-zero status' do
+      stub_branch('', 128)
 
-      lambda { subject.current }.should_not succeed
+      GitTracker::Repository.should_receive(:ensure_exists)
+      subject.current
     end
   end
 
