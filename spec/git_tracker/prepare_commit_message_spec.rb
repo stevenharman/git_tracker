@@ -80,7 +80,7 @@ describe GitTracker::PrepareCommitMessage do
 
         it 'appends the keyword and the story number' do
           commit_message.should_receive(:append).with('[Delivers #8675309]')
-          hook.run 
+          hook.run
         end
       end
 
