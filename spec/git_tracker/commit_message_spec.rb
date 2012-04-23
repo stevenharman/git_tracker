@@ -17,14 +17,16 @@ describe GitTracker::CommitMessage do
   end
 
   describe '#keyword' do
-    it 'should return the correct keyword' do
-      stub_commit_message('[Delivers]')
-      subject.keyword.should == 'Delivers'
+    %w[fix Fixed FIXES Complete completed completes FINISH finished Finishes].each do |keyword|
+      it "detects the #{keyword} keyword" do
+        stub_commit_message("Did the darn thing. [#{keyword}]")
+        subject.keyword.should == keyword
+      end
     end
 
-    it 'should return nil when there no keyword matching' do
-      stub_commit_message('[Something]')
-      subject.keyword.should be_nil
+    it 'does not find the keyword when it does not exist' do
+      stub_commit_message('Did the darn thing. [Something]')
+      subject.keyword.should_not be
     end
   end
 
