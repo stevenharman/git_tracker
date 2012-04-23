@@ -106,21 +106,23 @@ Results in this commit message:
 ### Keywords
 You can use the custom keywords that Pivotal Tracker provide with the API.
 
-The keywords are [Delivers] and [Fixes]
+The keywords are `fixed`, `completed`, and `finshed` in square brackets. You
+may also use different cases forms of these verbs, such as `Fix` or `FIXES`.
 
-If you use those keywords in your commit message, the keyword will be prepended to the story ID in the commit message.
+If you use those keywords in your commit message, the keyword will be prepended
+to the story ID in the commit message.
 
 For example:
 
 ```bash
 # on branch named `bug/redis_connection_not_initializing_#8675309`
-$ git commit -am "changed the redis connection string [Fixes]"
+$ git commit -am "Change the redis connection string [Fixes]"
 ```
 
 Results in this commit message:
 
 ```bash
-changed the redis connection string [Fixes]
+Change the redis connection string [Fixes]
 
 [Fixes #8675309]
 ```
