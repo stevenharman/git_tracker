@@ -106,8 +106,9 @@ Results in this commit message:
 ### Keywords
 You can use the custom keywords that Pivotal Tracker provide with the API.
 
-The keywords are `fixed`, `completed`, and `finshed` in square brackets. You
-may also use different cases forms of these verbs, such as `Fix` or `FIXES`.
+The keywords are `fixed`, `completed`, `finshed`, and `delivered` in square
+brackets. You may also use different cases forms of these verbs, such as `Fix`
+or `FIXES`.
 
 If you use those keywords in your commit message, the keyword will be prepended
 to the story ID in the commit message.

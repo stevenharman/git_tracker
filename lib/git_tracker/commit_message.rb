@@ -11,7 +11,7 @@ module GitTracker
     end
 
     def keyword
-      @message =~ /\[(fix|fixes|fixed|complete|completes|completed|finish|finishes|finished)\]/io
+      @message =~ /\[(fix|fixes|fixed|complete|completes|completed|finish|finishes|finished|deliver|delivers|delivered)\]/io
       $1
     end
 

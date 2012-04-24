@@ -1,12 +1,19 @@
 ### dev
 [full changelog](https://github.com/highgroove/git_tracker/compare/v1.3.0...master)
 
+### 1.3.1 / 2012-04-23
+[full changelog](https://github.com/highgroove/git_tracker/compare/v1.3.0...v1.3.1)
+
+Bug fixes
+
+* Bring back fourth Pivotal Tracker keyword, `delivered`
+
 ### 1.3.0 / 2012-04-23
 [full changelog](https://github.com/highgroove/git_tracker/compare/v1.2.0...v1.3.0)
 
 Enhancements
 
-* Allow all three Pivotal Tracker keyword states: `fixed`, `completed`, and `finished`.
+* Allow all three Pivotal Tracker keyword states: `fixed`, `completed`, and `finished`
 
 Bug fixes
 

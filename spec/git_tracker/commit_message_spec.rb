@@ -17,7 +17,7 @@ describe GitTracker::CommitMessage do
   end
 
   describe '#keyword' do
-    %w[fix Fixed FIXES Complete completed completes FINISH finished Finishes].each do |keyword|
+    %w[fix Fixed FIXES Complete completed completes FINISH finished Finishes Deliver delivered DELIVERS].each do |keyword|
       it "detects the #{keyword} keyword" do
         stub_commit_message("Did the darn thing. [#{keyword}]")
         subject.keyword.should == keyword
