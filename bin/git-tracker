@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'git_tracker'
-GitTracker.execute(*ARGV)
+GitTracker::Runner.execute(*ARGV)

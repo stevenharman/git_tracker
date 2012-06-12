@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'git_tracker'
+require 'git_tracker/runner'
 
-describe GitTracker do
+describe GitTracker::Runner do
   subject { described_class }
   let(:args) { ['a_file', 'the_source', 'sha1234'] }
 
