@@ -2,7 +2,7 @@
 [full changelog](https://github.com/highgroove/git_tracker/compare/v1.3.0...master)
 Enhancements
 
-* Support Ruby 1.8
+* Support Ruby 1.8.7
 * Generate standalone binary via `rake git-tracker`
 
 ### 1.3.1 / 2012-04-23
