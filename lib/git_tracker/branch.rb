@@ -4,7 +4,7 @@ require 'git_tracker/repository'
 module GitTracker
   module Branch
     def self.story_number
-      current[/#?(?<number>\d+)/, :number]
+      current[/#?(\d+)/, 1]
     end
 
     def self.current
@@ -12,7 +12,7 @@ module GitTracker
 
       Repository.ensure_exists unless exit_successful?
 
-      branch_path[%r{refs/heads/(?<name>.+)}, :name] || ''
+      branch_path[%r{refs/heads/(.+)}, 1] || ''
     end
 
     private

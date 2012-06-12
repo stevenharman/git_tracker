@@ -1,6 +1,6 @@
 require 'fake_file'
 require 'commit_message_helper'
-require_relative 'support/matchers/exit_code_matchers'
+require 'matchers/exit_code_matchers'
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

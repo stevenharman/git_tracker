@@ -1,5 +1,8 @@
 ### dev
 [full changelog](https://github.com/highgroove/git_tracker/compare/v1.3.0...master)
+Enhancements
+
+* Support Ruby 1.8
 
 ### 1.3.1 / 2012-04-23
 [full changelog](https://github.com/highgroove/git_tracker/compare/v1.3.0...v1.3.1)

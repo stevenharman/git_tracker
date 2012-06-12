@@ -60,7 +60,7 @@ describe GitTracker::PrepareCommitMessage do
 
     context 'branch name with a Pivotal Tracker story number' do
       let(:story) { '8675309' }
-      let(:commit_message) { stub('CommitMessage', mentions_story?: false) }
+      let(:commit_message) { stub('CommitMessage', :mentions_story? => false) }
 
       before do
         commit_message.stub(:keyword) { nil }
