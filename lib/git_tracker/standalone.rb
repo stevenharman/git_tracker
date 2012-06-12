@@ -13,6 +13,14 @@ module GitTracker
 
 preamble
 
+    def save(filename, path = '.')
+      dest = File.join(File.expand_path(path), filename)
+      File.open(dest, 'w') do |f|
+        build(f)
+        f.chmod(0755)
+      end
+    end
+
     def build(io)
       io.puts "#!#{ruby_executable}"
       io << PREAMBLE

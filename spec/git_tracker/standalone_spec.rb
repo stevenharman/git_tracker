@@ -1,11 +1,32 @@
 require 'git_tracker/standalone'
 
 describe GitTracker::Standalone do
-  subject { standalone }
-  let(:io) { StringIO.new }
-  let(:standalone) { described_class.build(io).string }
+
+  describe '#save' do
+    before do
+      File.delete 'git-tracker' if File.exists? 'git-tracker'
+    end
+
+    after do
+      File.delete 'git-tracker' if File.exists? 'git-tracker'
+    end
+
+    it 'saves to the named file' do
+      described_class.save('git-tracker')
+      File.size('./git-tracker').should > 100
+    end
+
+    it 'marks the binary as executable' do
+      described_class.save('git-tracker')
+      File.should be_executable('./git-tracker')
+    end
+  end
 
   describe '#build' do
+    subject { standalone }
+    let(:io) { StringIO.new }
+    let(:standalone) { described_class.build(io).string }
+
     it 'declares a shebang' do
       subject.should =~ /#!.+/
     end
