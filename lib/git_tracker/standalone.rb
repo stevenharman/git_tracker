@@ -8,7 +8,7 @@ module GitTracker
 # This file is generated code. DO NOT send patches for it.
 #
 # Original source files with comments are at:
-# https://github.com/highgroove/git_tracker
+# https://github.com/stevenharman/git_tracker
 #
 
 preamble

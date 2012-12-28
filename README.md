@@ -1,7 +1,7 @@
 # GitTracker
 
-[![Build Status](https://secure.travis-ci.org/highgroove/git_tracker.png)](http://travis-ci.org/highgroove/git_tracker)
-[![Dependency Status](https://gemnasium.com/highgroove/git_tracker.png)](https://gemnasium.com/highgroove/git_tracker)
+[![Build Status](https://secure.travis-ci.org/stevenharman/git_tracker.png)](http://travis-ci.org/stevenharman/git_tracker)
+[![Dependency Status](https://gemnasium.com/stevenharman/git_tracker.png)](https://gemnasium.com/stevenharman/git_tracker)
 
 *GitTracker*, or *git-tracker*, is a Git hook that will scan your current
 branch name looking for something it recognizes as a [Pivotal Tracker][pt]

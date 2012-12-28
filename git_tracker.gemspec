@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.version       = GitTracker::VERSION
   gem.authors       = ["Steven Harman"]
   gem.email         = ["steveharman@gmail.com"]
-  gem.homepage      = "https://github.com/highgroove/git_tracker"
+  gem.homepage      = "https://github.com/stevenharman/git_tracker"
   gem.summary       = %q{Teaching Git about Pivotal Tracker.}
   gem.description   = <<-EOF
     Some simple tricks that make working with Pivotal Tracker even
