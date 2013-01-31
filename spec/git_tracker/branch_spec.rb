@@ -41,11 +41,16 @@ describe GitTracker::Branch do
         stub_branch('refs/heads/alindeman/8675309_got_her_number')
         subject.story_number.should == '8675309'
       end
+
+      it 'finds the story in a branch with hyphens' do
+        stub_branch('refs/heads/stevenharman/got-her-number-8675309')
+        expect(subject.story_number).to eq('8675309')
+      end
     end
 
     context 'The current branch does not have a story number' do
       it 'finds no story' do
-        stub_branch('refs/heads/a_very_descriptive_name_without_a_#number')
+        stub_branch('refs/heads/a_very_descriptive_name-without_a_#number')
         subject.story_number.should_not be
       end
     end

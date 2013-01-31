@@ -138,18 +138,18 @@ Change the redis connection string [Fixes]
 name, optionally prefixing it with a hash (`#`). Examples:
 
   - `best_feature_ever_#8675309`
-  - `best_feature_ever_8675309`
+  - `best-feature-ever-8675309`
   - `8675309_best_feature_ever`
-  - `#8675309_best_feature_ever`
+  - `#8675309-best-feature-ever`
   - `your_name/8675309_best_feature_ever`
   - `your_name/#8675309_best_feature_ever`
 
 ## Contributing :octocat:
 
 1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
+2. Create your feature branch (`git checkout -b my_new_feature`)
 3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
+4. Push to the branch (`git push origin my_new_feature`)
 5. Create new Pull Request
 
 
