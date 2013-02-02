@@ -1,9 +1,13 @@
 ### dev
-[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.3.0...master)
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.4.0...master)
+
+### 1.4.1 / 2013-02-02
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.3.1...v1.4.1)
 Enhancements
 
 * Support Ruby 1.8.7
-* Generate standalone binary via `rake git-tracker`
+* Support installing via Homebrew
+* Generate standalone binary via `rake standalone:build`
 
 ### 1.3.1 / 2012-04-23
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.3.0...v1.3.1)
