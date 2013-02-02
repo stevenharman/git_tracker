@@ -4,6 +4,7 @@ Gemfile.lock
 coverage
 doc/
 lib/bundler/man
+/git-tracker
 pkg
 rdoc
 tmp

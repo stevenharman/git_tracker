@@ -10,3 +10,6 @@ file 'git-tracker' => FileList.new('lib/git_tracker.rb, lib/git_tracker/*.rb') d
   require 'git_tracker/standalone'
   GitTracker::Standalone.save(task.name)
 end
+
+desc 'Build standalone script'
+task :standalone => 'git-tracker'
