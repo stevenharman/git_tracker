@@ -11,22 +11,30 @@ format][pt-format], to your commit message.
 
 ## Installation
 
-You need to get the `git-tracker` executable on your system.
+### 1) Install the `git-tracker` executable
 
-### RubyGems
+You need to get the `git-tracker` executable on your system, and then you need
+to install the *git hook* into your local Git repository.
 
-Currently, this is the only option, but I plan to have a standalone version
-ready soon.
+- via [Homebrew][homebrew] (preferred)
 
-```bash
-$ gem install git_tracker
-```
+  ```bash
+  $ brew install git-tracker
+  ```
 
-Once you have the `git-tracker` executable on your system you need to install
-the hook into your local Git repository.
+- via [RubyGems][rubygems] (if you must)
+
+  ```bash
+  $ gem install git_tracker
+  ```
+
+### 2) Install the hook
+
+You need to add the hook into each repository where you want to use it.
 
 ```bash
 # from inside a local Git repository
+# for example: /path/to/repo/
 $ git-tracker install
 ```
 
@@ -156,3 +164,5 @@ name, optionally prefixing it with a hash (`#`). Examples:
 [pt]: https://www.pivotaltracker.com/
 [pt-format]: https://www.pivotaltracker.com/help/api?version=v3#scm_post_commit_message_syntax
 [tpope]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+[homebrew]: http://mxcl.github.com/homebrew
+[rubygems]: http://rubygems.org/gems/git_tracker
