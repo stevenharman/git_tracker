@@ -1,9 +1,12 @@
 #!/usr/bin/env rake
-require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
+
+namespace :gem do
+  require 'bundler/gem_tasks'
+end
 
 file 'git-tracker' => FileList.new('lib/git_tracker.rb', 'lib/git_tracker/*.rb') do |task|
   $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
