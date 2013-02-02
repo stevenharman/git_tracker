@@ -2,7 +2,7 @@
 require File.expand_path('../lib/git_tracker/version', __FILE__)
 
 # Skip these tasks when being installed by Homebrew
-unless ENV['HOMEBREW_PREFIX']
+unless defined?(Homebrew)
 
   require 'rspec/core/rake_task'
   RSpec::Core::RakeTask.new(:spec)
