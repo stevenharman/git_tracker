@@ -30,7 +30,7 @@ namespace :standalone do
 
   task :homebrew do
     Dir.chdir `brew --prefix`.chomp do
-      sh 'git checkout -q origin'
+      sh 'git checkout -q master'
       sh 'git pull -q origin master'
 
       formula_file = 'Library/Formula/git-tracker.rb'
