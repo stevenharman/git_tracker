@@ -13,3 +13,14 @@ end
 
 desc 'Build standalone script'
 task :standalone => 'git-tracker'
+
+namespace :standalone do
+
+  desc 'Install standalone script'
+  task :install => :standalone do
+    prefix = ENV['PREFIX'] || ENV['prefix'] || '/usr/local'
+
+    FileUtils.mkdir_p "#{prefix}/bin"
+    FileUtils.cp 'git-tracker', "#{prefix}/bin", :preserve => true
+  end
+end
