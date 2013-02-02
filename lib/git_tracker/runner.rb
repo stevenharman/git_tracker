@@ -17,6 +17,10 @@ module GitTracker
     def self.install
       Hook.install
     end
+
+    def self.test_command
+      puts 'git-tracker is here. How are you?'
+    end
   end
 
 end

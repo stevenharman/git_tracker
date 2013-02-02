@@ -35,4 +35,9 @@ describe GitTracker::Runner do
     end
   end
 
+  it '.test_command reports that it was run' do
+    runner.should_receive(:puts).with('git-tracker is here. How are you?')
+    runner.execute('test-command')
+  end
+
 end
