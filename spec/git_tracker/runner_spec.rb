@@ -2,36 +2,36 @@ require 'spec_helper'
 require 'git_tracker/runner'
 
 describe GitTracker::Runner do
-  subject { described_class }
+  subject(:runner) { described_class }
   let(:args) { ['a_file', 'the_source', 'sha1234'] }
 
   describe '.execute' do
     before do
-      subject.stub(:prepare_commit_msg) { true }
+      runner.stub(:prepare_commit_msg) { true }
     end
 
     it 'runs the hook, passing the args' do
-      subject.should_receive(:prepare_commit_msg).with(*args) { true }
-      subject.execute('prepare-commit-msg', *args)
+      runner.should_receive(:prepare_commit_msg).with(*args) { true }
+      runner.execute('prepare-commit-msg', *args)
     end
 
     # TODO: stop the abort from writing to stderr during tests?
     it 'does not run hooks we do not know about' do
-      expect { subject.execute('non-existent-hook', *args) }.to_not succeed
+      expect { runner.execute('non-existent-hook', *args) }.to_not succeed
     end
   end
 
   describe '.prepare_commit_msg' do
     it 'runs the hook, passing the args' do
       GitTracker::PrepareCommitMessage.should_receive(:run).with(*args) { true }
-      subject.prepare_commit_msg(*args)
+      runner.prepare_commit_msg(*args)
     end
   end
 
   describe '.install' do
     it 'tells the hook to install itself' do
       GitTracker::Hook.should_receive(:install)
-      subject.install
+      runner.install
     end
   end
 
