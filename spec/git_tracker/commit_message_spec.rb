@@ -9,7 +9,7 @@ describe GitTracker::CommitMessage do
   let(:file) { 'COMMIT_EDITMSG' }
 
   it 'requires path to the temporary commit message file' do
-    lambda { GitTracker::CommitMessage.new }.should raise_error ArgumentError
+    expect { GitTracker::CommitMessage.new }.to raise_error ArgumentError
   end
 
   def stub_commit_message(story_text)
@@ -20,13 +20,13 @@ describe GitTracker::CommitMessage do
     %w[fix Fixed FIXES Complete completed completes FINISH finished Finishes Deliver delivered DELIVERS].each do |keyword|
       it "detects the #{keyword} keyword" do
         stub_commit_message("Did the darn thing. [#{keyword}]")
-        subject.keyword.should == keyword
+        expect(subject.keyword).to eq(keyword)
       end
     end
 
     it 'does not find the keyword when it does not exist' do
       stub_commit_message('Did the darn thing. [Something]')
-      subject.keyword.should_not be
+      expect(subject.keyword).to_not be
     end
   end
 
@@ -34,57 +34,57 @@ describe GitTracker::CommitMessage do
     context 'commit message contains the special Pivotal Tracker story syntax' do
       it 'allows just the number' do
         stub_commit_message('[#8675309]')
-        subject.should be_mentions_story('8675309')
+        expect(subject).to be_mentions_story('8675309')
       end
 
       it 'allows multiple numbers' do
         stub_commit_message('[#99 #777 #8675309 #111222]')
-        subject.should be_mentions_story('99')
-        subject.should be_mentions_story('777')
-        subject.should be_mentions_story('8675309')
-        subject.should be_mentions_story('111222')
+        expect(subject).to be_mentions_story('99')
+        expect(subject).to be_mentions_story('777')
+        expect(subject).to be_mentions_story('8675309')
+        expect(subject).to be_mentions_story('111222')
       end
 
       it 'allows state change before number' do
         stub_commit_message('[Fixes #8675309]')
-        subject.should be_mentions_story('8675309')
+        expect(subject).to be_mentions_story('8675309')
       end
 
       it 'allows state change after the number' do
         stub_commit_message('[#8675309 Delivered]')
-        subject.should be_mentions_story('8675309')
+        expect(subject).to be_mentions_story('8675309')
       end
 
       it 'allows surrounding text' do
         stub_commit_message('derp de #herp [Fixes #8675309] de herp-ity derp')
-        subject.should be_mentions_story('8675309')
+        expect(subject).to be_mentions_story('8675309')
       end
     end
 
     context 'commit message doesn not contain the special Pivotal Tracker story syntax' do
       it 'requires brackets' do
         stub_commit_message('#8675309')
-        subject.should_not be_mentions_story('8675309')
+        expect(subject).to_not be_mentions_story('8675309')
       end
 
       it 'requires a pound sign' do
         stub_commit_message('[8675309]')
-        subject.should_not be_mentions_story('8675309')
+        expect(subject).to_not be_mentions_story('8675309')
       end
 
       it 'does not allow the bare number' do
         stub_commit_message('8675309')
-        subject.should_not be_mentions_story('8675309')
+        expect(subject).to_not be_mentions_story('8675309')
       end
 
       it 'does not allow multiple state changes' do
         stub_commit_message('[Fixes Deploys #8675309]')
-        subject.should_not be_mentions_story('8675309')
+        expect(subject).to_not be_mentions_story('8675309')
       end
 
       it 'does not allow comments' do
         stub_commit_message('#[#8675309]')
-        subject.should_not be_mentions_story('8675309')
+        expect(subject).to_not be_mentions_story('8675309')
       end
     end
   end
@@ -99,22 +99,21 @@ describe GitTracker::CommitMessage do
     end
 
     it 'handles no existing message' do
-      stub_original_commit_message("\n\n# some other comments\n")
-      subject.append('[#8675309]')
-
-      fake_file.content.should == <<-COMMIT_MESSAGE.strip_heredoc
+      commit_message = <<-COMMIT_MESSAGE.strip_heredoc
 
 
         [#8675309]
         # some other comments
       COMMIT_MESSAGE
+
+      stub_original_commit_message("\n\n# some other comments\n")
+      subject.append('[#8675309]')
+
+      expect(fake_file.content).to eq(commit_message)
     end
 
     it 'preserves existing messages' do
-      stub_original_commit_message("A first line\n\nWith more here\n# other comments\n")
-      subject.append('[#8675309]')
-
-      fake_file.content.should == <<-COMMIT_MESSAGE.strip_heredoc
+      commit_message = <<-COMMIT_MESSAGE.strip_heredoc
         A first line
 
         With more here
@@ -122,13 +121,15 @@ describe GitTracker::CommitMessage do
         [#8675309]
         # other comments
       COMMIT_MESSAGE
+
+      stub_original_commit_message("A first line\n\nWith more here\n# other comments\n")
+      subject.append('[#8675309]')
+
+      expect(fake_file.content).to eq(commit_message)
     end
 
     it 'preserves line breaks in comments' do
-      stub_original_commit_message("# comment #1\n# comment B\n# comment III")
-      subject.append('[#8675309]')
-
-      fake_file.content.should == <<-COMMIT_MESSAGE.strip_heredoc
+      commit_message = <<-COMMIT_MESSAGE.strip_heredoc
 
 
         [#8675309]
@@ -136,6 +137,11 @@ describe GitTracker::CommitMessage do
         # comment B
         # comment III
       COMMIT_MESSAGE
+
+      stub_original_commit_message("# comment #1\n# comment B\n# comment III")
+      subject.append('[#8675309]')
+
+      expect(fake_file.content).to eq(commit_message)
     end
   end
 end

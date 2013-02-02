@@ -29,17 +29,17 @@ describe GitTracker::Branch do
     context 'Current branch has a story number' do
       it 'finds the story that starts with a hash' do
         stub_branch('refs/heads/a_very_descriptive_name_#8675309')
-        subject.story_number.should == '8675309'
+        expect(subject.story_number).to eq('8675309')
       end
 
       it 'finds the story without a leading hash' do
         stub_branch('refs/heads/a_very_descriptive_name_1235309')
-        subject.story_number.should == '1235309'
+        expect(subject.story_number).to eq('1235309')
       end
 
       it 'finds the story following a forward hash' do
         stub_branch('refs/heads/alindeman/8675309_got_her_number')
-        subject.story_number.should == '8675309'
+        expect(subject.story_number).to eq('8675309')
       end
 
       it 'finds the story in a branch with hyphens' do
@@ -51,14 +51,14 @@ describe GitTracker::Branch do
     context 'The current branch does not have a story number' do
       it 'finds no story' do
         stub_branch('refs/heads/a_very_descriptive_name-without_a_#number')
-        subject.story_number.should_not be
+        expect(subject.story_number).to_not be
       end
     end
 
     context 'Not on a branch (HEAD does not exist)' do
       it 'finds no story' do
         stub_branch('')
-        subject.story_number.should_not be
+        expect(subject.story_number).to_not be
       end
     end
   end

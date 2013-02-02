@@ -13,19 +13,19 @@ describe GitTracker::Repository do
 
     it 'gets the path to the top-level directory of the local Repository' do
       $?.stub(:exitstatus) { 0 }
-      subject.root.should == '/path/to/git/repo/root'
+      expect(subject.root).to eq('/path/to/git/repo/root')
     end
 
     it 'aborts when not in a git repository' do
       $?.stub(:exitstatus) { 128 }
-      lambda { subject.root }.should_not succeed
+      expect { subject.root }.to_not succeed
     end
   end
 
   describe '.ensure_exists' do
     it 'aborts when not in a git repository' do
       $?.stub(:exitstatus) { 128 }
-      lambda { subject.root }.should_not succeed
+      expect { subject.root }.to_not succeed
     end
   end
 

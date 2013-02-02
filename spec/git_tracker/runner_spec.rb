@@ -17,7 +17,7 @@ describe GitTracker::Runner do
 
     # TODO: stop the abort from writing to stderr during tests?
     it 'does not run hooks we do not know about' do
-      lambda { subject.execute('non-existent-hook', *args) }.should_not succeed
+      expect { subject.execute('non-existent-hook', *args) }.to_not succeed
     end
   end
 

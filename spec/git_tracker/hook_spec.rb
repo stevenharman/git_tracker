@@ -3,7 +3,7 @@ require 'git_tracker/hook'
 require 'active_support/core_ext/string/strip'
 
 describe GitTracker::Hook do
-  subject { described_class }
+  subject(:hook) { described_class }
   let(:root) { '/path/to/git/repo/toplevel' }
   let(:hook_path) { File.join(root, '.git', 'hooks', 'prepare-commit-msg') }
 
@@ -13,8 +13,8 @@ describe GitTracker::Hook do
     end
 
     it 'installs to the root of the Git repository' do
-      subject.should_receive(:install_at).with(root)
-      subject.install
+      hook.should_receive(:install_at).with(root)
+      hook.install
     end
   end
 
@@ -26,22 +26,24 @@ describe GitTracker::Hook do
 
     it 'writes the hook into the hooks directory' do
       File.should_receive(:open).with(hook_path, 'w')
-      subject.install_at(root)
+      hook.install_at(root)
     end
 
     it 'makes the hook executable' do
-      subject.install_at(root)
-      fake_file.mode.should == 0755
+      hook.install_at(root)
+      expect(fake_file.mode).to eq(0755)
     end
 
     it 'writes the hook code in the hook file' do
-      subject.install_at(root)
-      fake_file.content.should == <<-HOOK_CODE.strip_heredoc
+      hook_code = <<-HOOK_CODE.strip_heredoc
         #!/usr/bin/env bash
 
         git-tracker prepare-commit-msg "$@"
 
       HOOK_CODE
+
+      hook.install_at(root)
+      expect(fake_file.content).to eq(hook_code)
     end
   end
 

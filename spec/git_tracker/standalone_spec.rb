@@ -13,12 +13,12 @@ describe GitTracker::Standalone do
 
     it 'saves to the named file' do
       described_class.save('git-tracker')
-      File.size('./git-tracker').should > 100
+      expect(File.size('./git-tracker')).to be > 100
     end
 
     it 'marks the binary as executable' do
       described_class.save('git-tracker')
-      File.should be_executable('./git-tracker')
+      expect(File).to be_executable('./git-tracker')
     end
   end
 
@@ -28,33 +28,33 @@ describe GitTracker::Standalone do
     let(:standalone) { described_class.build(io).string }
 
     it 'declares a shebang' do
-      subject.should =~ /#!.+/
+      expect(subject).to match(/#!.+/)
     end
 
     it 'includes generated code notice' do
-      subject.should include('This file is generated')
+      expect(subject).to include('This file is generated')
     end
 
     it 'inlines the code' do
-      subject.should include('Hook')
-      subject.should include('Repository')
-      subject.should include('PrepareCommitMessage')
-      subject.should include('Runner')
-      subject.should include('Branch')
-      subject.should include('CommitMessage')
-      subject.should include('VERSION')
+      expect(subject).to include('Hook')
+      expect(subject).to include('Repository')
+      expect(subject).to include('PrepareCommitMessage')
+      expect(subject).to include('Runner')
+      expect(subject).to include('Branch')
+      expect(subject).to include('CommitMessage')
+      expect(subject).to include('VERSION')
     end
 
     it 'does not inline the standalone code' do
-      subject.should_not include('module Standalone')
+      expect(subject).to_not include('module Standalone')
     end
 
     it 'includes the call to execute the hook' do
-      subject.should include('GitTracker::Runner.execute(*ARGV)')
+      expect(subject).to include('GitTracker::Runner.execute(*ARGV)')
     end
 
     it 'excludes requiring git_tracker code' do
-      subject.should_not =~ /^require\s+["']git_tracker/
+      expect(subject).to_not match(/^require\s+["']git_tracker/)
     end
   end
 
@@ -67,12 +67,12 @@ describe GitTracker::Standalone do
 
     it 'uses user-level ruby binary when it is executable' do
       File.stub(:executable?).with('/usr/bin/ruby') { true }
-      subject.ruby_executable.should == '/usr/bin/ruby'
+      expect(subject.ruby_executable).to eq('/usr/bin/ruby')
     end
 
     it 'uses rbconfig ruby when user-level ruby binary not executable' do
       File.stub(:executable?).with('/usr/bin/ruby') { false }
-      subject.ruby_executable.should == '/some/other/bin/ruby'
+      expect(subject.ruby_executable).to eq('/some/other/bin/ruby')
     end
   end
 end
