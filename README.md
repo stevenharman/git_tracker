@@ -11,10 +11,10 @@ format][pt-format], to your commit message.
 
 ## Installation
 
-### 1) Install the `git-tracker` executable
+### 1) Install the `git-tracker` binary
 
-You need to get the `git-tracker` executable on your system, and then you need
-to install the *git hook* into your local Git repository.
+You need to get the `git-tracker` binary onto your system, and then you need to
+install the *git hook* into your local Git repository.
 
 - via [Homebrew][homebrew] (preferred)
 
@@ -35,7 +35,7 @@ You need to add the hook into each repository where you want to use it.
 ```bash
 # from inside a local Git repository
 # for example: /path/to/repo/
-$ git-tracker install
+$ git tracker install
 ```
 
 This will put the `prepare-commit-msg` hook in the `/path/to/repo/.git/hooks`
@@ -142,7 +142,7 @@ Change the redis connection string [Fixes]
 
 ### Valid branch names
 
-*git_tracker* allows you to include the story number any where in the branch
+*GitTracker* allows you to include the story number any where in the branch
 name, optionally prefixing it with a hash (`#`). Examples:
 
   - `best_feature_ever_#8675309`
