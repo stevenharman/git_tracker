@@ -47,13 +47,9 @@ preamble
 
     def inline_source(code, io)
       code.each_line do |line|
-        io << line unless comment?(line) || require_own_file?(line)
+        io << line unless require_own_file?(line)
       end
       io.puts ''
-    end
-
-    def comment?(line)
-      line =~ /^\s*#/
     end
 
     def require_own_file?(line)

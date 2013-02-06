@@ -45,6 +45,14 @@ describe GitTracker::Standalone do
       expect(subject).to include('VERSION')
     end
 
+    it 'inlines the message HEREDOC' do
+      expect(standalone).to include('#{preamble.strip}')
+    end
+
+    it 'inlines the shebang for the hook' do
+      expect(standalone).to include('#!/usr/bin/env bash')
+    end
+
     it 'does not inline the standalone code' do
       expect(subject).to_not include('module Standalone')
     end
