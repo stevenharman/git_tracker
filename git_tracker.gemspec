@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rspec", "~> 2.12"
   gem.add_development_dependency "rspec-spies", "~> 2.0"
   gem.add_development_dependency "activesupport", "~> 3.2"
+  gem.add_development_dependency "pry", "~> 0.9.11"
   gem.add_development_dependency "rake"
 
   gem.files         = `git ls-files`.split("\n")
