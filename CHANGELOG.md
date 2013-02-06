@@ -1,8 +1,8 @@
 ### dev
-[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.5.0...master)
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.5.1...master)
 
-### 1.5.0 / 2013-02-02
-[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.4.0...v1.5.0)
+### 1.5.1 / 2013-02-02
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.4.0...v1.5.1)
 
 Enhancements
 
