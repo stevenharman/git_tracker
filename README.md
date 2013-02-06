@@ -16,13 +16,13 @@ format][pt-format], to your commit message.
 You need to get the `git-tracker` binary onto your system, and then you need to
 install the *git hook* into your local Git repository.
 
-- via [Homebrew][homebrew] (preferred)
+- via [Homebrew][homebrew] :beers: (preferred)
 
   ```bash
   $ brew install git-tracker
   ```
 
-- via [RubyGems][rubygems] (if you must)
+- via [RubyGems][rubygems] :pensive: (if you must)
 
   ```bash
   $ gem install git_tracker
