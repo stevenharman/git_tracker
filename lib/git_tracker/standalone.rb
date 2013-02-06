@@ -35,6 +35,16 @@ preamble
       io
     end
 
+    def ruby_executable
+      if File.executable? '/usr/bin/ruby' then '/usr/bin/ruby'
+      else
+        require 'rbconfig'
+        File.join(RbConfig::CONFIG['bindir'], RbConfig::CONFIG['ruby_install_name'])
+      end
+    end
+
+    private
+
     def inline_source(code, io)
       code.each_line do |line|
         io << line unless comment?(line) || require_own_file?(line)
@@ -57,14 +67,6 @@ preamble
             yield File.join(GIT_TRACKER_ROOT, 'lib', "#{$1}.rb")
           end
         end
-      end
-    end
-
-    def ruby_executable
-      if File.executable? '/usr/bin/ruby' then '/usr/bin/ruby'
-      else
-        require 'rbconfig'
-        File.join(RbConfig::CONFIG['bindir'], RbConfig::CONFIG['ruby_install_name'])
       end
     end
 
