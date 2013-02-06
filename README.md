@@ -54,8 +54,8 @@ $ git checkout -b a_useful_and_helpful_name_8675309
 ```
 
 When you commit, Git will fire the hook which will find the story number in the
-branch name and prepare your commit message so that it include the story number
-in the special Pivotal Tracker syntax.
+branch name and prepare your commit message so that it includes the story number
+in the [special Pivotal Tracker syntax][pt-format].
 
 ```bash
 # on branch named `best_feature_ever-8675309`
@@ -100,8 +100,8 @@ Look at this rad code, yo!
 [#8675309]
 ```
 
-However, if you include the story number in the Pivotal Tracker format in your
-commit message, the hook will do nothing.
+However, if you include the story number in the Pivotal Tracker format within
+your commit message, the hook will do nothing.
 
 ```bash
 # on branch named `best_feature_ever-8675309`
@@ -116,11 +116,11 @@ Results in this commit message:
 ```
 
 ### Keywords
-You can use the custom keywords that Pivotal Tracker provide with the API.
+You can use the custom keywords that Pivotal Tracker provides with the API.
 
 The keywords are `fixed`, `completed`, `finished`, and `delivered` in square
-brackets. You may also use different case forms of these verbs, such as `Fix`
-or `FIXES`.
+brackets. You may also use different cases and forms of these verbs, such as
+`Fix` or `FIXES`.
 
 If you use those keywords in your commit message, the keyword will be prepended
 to the story ID in the commit message.
