@@ -37,8 +37,11 @@ describe GitTracker::PrepareCommitMessage do
 
   describe '#run' do
     let(:hook) { GitTracker::PrepareCommitMessage.new('FILE1') }
+    let(:commit_message) { double('CommitMessage', append: nil) }
+
     before do
       GitTracker::Branch.stub(:story_number) { story }
+      GitTracker::CommitMessage.stub(:new) { commit_message }
     end
 
     context 'with an existing commit (via `-c`, `-C`, or `--amend` options)' do
@@ -54,33 +57,30 @@ describe GitTracker::PrepareCommitMessage do
 
       it 'exits without updating the commit message' do
         expect { hook.run }.to succeed
-        GitTracker::CommitMessage.should_not have_received(:append)
+        expect(commit_message).to_not have_received(:append)
       end
     end
 
     context 'branch name with a Pivotal Tracker story number' do
       let(:story) { '8675309' }
-      let(:commit_message) { double('CommitMessage', :mentions_story? => false) }
-
       before do
+        commit_message.stub(:mentions_story?) { false }
         commit_message.stub(:keyword) { nil }
-        GitTracker::CommitMessage.stub(:new) { commit_message }
       end
 
       it 'appends the number to the commit message' do
-        commit_message.should_receive(:append).with('[#8675309]')
         hook.run
+        expect(commit_message).to have_received(:append).with('[#8675309]')
       end
 
       context 'keyword mentioned in the commit message' do
         before do
-          commit_message.stub(:mentions_story?).with('8675309') { false }
           commit_message.stub(:keyword) { 'Delivers' }
         end
 
         it 'appends the keyword and the story number' do
-          commit_message.should_receive(:append).with('[Delivers #8675309]')
           hook.run
+          expect(commit_message).to have_received(:append).with('[Delivers #8675309]')
         end
       end
 
@@ -91,7 +91,7 @@ describe GitTracker::PrepareCommitMessage do
 
         it 'exits without updating the commit message' do
           expect { hook.run }.to succeed
-          GitTracker::CommitMessage.should_not have_received(:append)
+          expect(commit_message).to_not have_received(:append)
         end
       end
     end
