@@ -23,8 +23,15 @@ module GitTracker
       self.init
     end
 
-    def self.test_command
-      puts "git-tracker #{VERSION} is here. How are you?"
+    def self.help
+      puts <<-HELP
+git-tracker #{VERSION} is installed.
+
+Remember, git-tracker is a hook which Git interacts with during its normal
+lifecycle of committing, rebasing, merging, etc. You need to initialize this
+hook by running `git-tracker init` from each repository in which you wish to
+use it. Cheers!
+      HELP
     end
   end
 
