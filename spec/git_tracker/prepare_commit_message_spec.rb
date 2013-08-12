@@ -2,36 +2,36 @@ require 'spec_helper'
 require 'git_tracker/prepare_commit_message'
 
 describe GitTracker::PrepareCommitMessage do
-  subject { GitTracker::PrepareCommitMessage }
+  subject(:prepare_commit_message) { GitTracker::PrepareCommitMessage }
 
   describe '.run' do
-    let(:hook) { stub('PrepareCommitMessage') }
+    let(:hook) { double('PrepareCommitMessage') }
     before do
-      subject.stub(:new) { hook }
+      prepare_commit_message.stub(:new) { hook }
     end
 
     it 'runs the hook' do
       hook.should_receive(:run)
-      subject.run('FILE1', 'hook_source', 'sha1234')
+      prepare_commit_message.run('FILE1', 'hook_source', 'sha1234')
     end
   end
 
   describe '.new' do
 
     it 'requires the name of the commit message file' do
-      expect { subject.new }.to raise_error(ArgumentError)
+      expect { prepare_commit_message.new }.to raise_error(ArgumentError)
     end
 
     it 'remembers the name of the commit message file' do
-      expect(subject.new('FILE1').file).to eq('FILE1')
+      expect(prepare_commit_message.new('FILE1').file).to eq('FILE1')
     end
 
     it 'optionally accepts a message source' do
-      expect(hook = subject.new('FILE1', 'merge').source).to eq('merge')
+      expect(hook = prepare_commit_message.new('FILE1', 'merge').source).to eq('merge')
     end
 
     it 'optionally accepts the SHA-1 of a commit' do
-      expect(hook = subject.new('FILE1', 'commit', 'abc1234').commit_sha).to eq('abc1234')
+      expect(hook = prepare_commit_message.new('FILE1', 'commit', 'abc1234').commit_sha).to eq('abc1234')
     end
   end
 
@@ -60,7 +60,7 @@ describe GitTracker::PrepareCommitMessage do
 
     context 'branch name with a Pivotal Tracker story number' do
       let(:story) { '8675309' }
-      let(:commit_message) { stub('CommitMessage', :mentions_story? => false) }
+      let(:commit_message) { double('CommitMessage', :mentions_story? => false) }
 
       before do
         commit_message.stub(:keyword) { nil }

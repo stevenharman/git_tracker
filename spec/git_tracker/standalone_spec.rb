@@ -23,51 +23,50 @@ describe GitTracker::Standalone do
   end
 
   describe '#build' do
-    subject { standalone }
+    subject(:standalone_script) { described_class.build(io).string }
     let(:io) { StringIO.new }
-    let(:standalone) { described_class.build(io).string }
 
     it 'declares a shebang' do
-      expect(subject).to match(/#!.+/)
+      expect(standalone_script).to match(/#!.+/)
     end
 
     it 'includes generated code notice' do
-      expect(subject).to include('This file is generated')
+      expect(standalone_script).to include('This file is generated')
     end
 
     it 'inlines the code' do
-      expect(subject).to include('Hook')
-      expect(subject).to include('Repository')
-      expect(subject).to include('PrepareCommitMessage')
-      expect(subject).to include('Runner')
-      expect(subject).to include('Branch')
-      expect(subject).to include('CommitMessage')
-      expect(subject).to include('VERSION')
+      expect(standalone_script).to include('Hook')
+      expect(standalone_script).to include('Repository')
+      expect(standalone_script).to include('PrepareCommitMessage')
+      expect(standalone_script).to include('Runner')
+      expect(standalone_script).to include('Branch')
+      expect(standalone_script).to include('CommitMessage')
+      expect(standalone_script).to include('VERSION')
     end
 
     it 'inlines the message HEREDOC' do
-      expect(standalone).to include('#{preamble.strip}')
+      expect(standalone_script).to include('#{preamble.strip}')
     end
 
     it 'inlines the shebang for the hook' do
-      expect(standalone).to include('#!/usr/bin/env bash')
+      expect(standalone_script).to include('#!/usr/bin/env bash')
     end
 
     it 'does not inline the standalone code' do
-      expect(subject).to_not include('module Standalone')
+      expect(standalone_script).to_not include('module Standalone')
     end
 
     it 'includes the call to execute the hook' do
-      expect(subject).to include('GitTracker::Runner.execute(*ARGV)')
+      expect(standalone_script).to include('GitTracker::Runner.execute(*ARGV)')
     end
 
     it 'excludes requiring git_tracker code' do
-      expect(subject).to_not match(/^require\s+["']git_tracker/)
+      expect(standalone_script).to_not match(/^require\s+["']git_tracker/)
     end
   end
 
   describe '#ruby_executable' do
-    subject { described_class }
+    subject(:standalone) { described_class }
     before do
       RbConfig::CONFIG.stub(:[]).with('bindir') { '/some/other/bin' }
       RbConfig::CONFIG.stub(:[]).with('ruby_install_name') { 'ruby' }
@@ -75,12 +74,12 @@ describe GitTracker::Standalone do
 
     it 'uses user-level ruby binary when it is executable' do
       File.stub(:executable?).with('/usr/bin/ruby') { true }
-      expect(subject.ruby_executable).to eq('/usr/bin/ruby')
+      expect(standalone.ruby_executable).to eq('/usr/bin/ruby')
     end
 
     it 'uses rbconfig ruby when user-level ruby binary not executable' do
       File.stub(:executable?).with('/usr/bin/ruby') { false }
-      expect(subject.ruby_executable).to eq('/some/other/bin/ruby')
+      expect(standalone.ruby_executable).to eq('/some/other/bin/ruby')
     end
   end
 end
