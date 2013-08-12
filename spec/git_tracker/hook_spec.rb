@@ -7,31 +7,31 @@ describe GitTracker::Hook do
   let(:root) { '/path/to/git/repo/toplevel' }
   let(:hook_path) { File.join(root, '.git', 'hooks', 'prepare-commit-msg') }
 
-  describe '.install' do
+  describe '.init' do
     before do
       GitTracker::Repository.stub(:root) { root }
-      hook.stub(:install_at)
+      hook.stub(:init_at)
     end
 
-    it 'installs to the root of the Git repository' do
-      hook.install
-      expect(hook).to have_received(:install_at).with(root)
+    it 'initializes to the root of the Git repository' do
+      hook.init
+      expect(hook).to have_received(:init_at).with(root)
     end
   end
 
-  describe '.install_at' do
+  describe '.init_at' do
     let(:fake_file) { GitTracker::FakeFile.new }
     before do
       File.stub(:open).and_yield(fake_file)
     end
 
     it 'writes the hook into the hooks directory' do
-      hook.install_at(root)
+      hook.init_at(root)
       expect(File).to have_received(:open).with(hook_path, 'w')
     end
 
     it 'makes the hook executable' do
-      hook.install_at(root)
+      hook.init_at(root)
       expect(fake_file.mode).to eq(0755)
     end
 
@@ -43,7 +43,7 @@ describe GitTracker::Hook do
 
       HOOK_CODE
 
-      hook.install_at(root)
+      hook.init_at(root)
       expect(fake_file.content).to eq(hook_code)
     end
   end

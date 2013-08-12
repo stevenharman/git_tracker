@@ -13,8 +13,7 @@ format][pt-format], to your commit message.
 
 ### 1) Install the `git-tracker` binary
 
-You need to get the `git-tracker` binary onto your system, and then you need to
-install the *git hook* into your local Git repository.
+You need to get the `git-tracker` binary onto your system.
 
 - via [Homebrew][homebrew] :beers: (preferred)
 
@@ -28,25 +27,26 @@ install the *git hook* into your local Git repository.
   $ gem install git_tracker
   ```
 
-### 2) Install the hook
+### 2) Initialize the hook
 
-You need to add the hook into each repository where you want to use it.
+Then you need to initialize the *git hook* into each local Git repository where
+you want to use it.
 
 ```bash
 # from inside a local Git repository
 # for example: /path/to/repo/
-$ git tracker install
+$ git tracker init
 ```
 
 This will put the `prepare-commit-msg` hook in the `/path/to/repo/.git/hooks`
 directory and make it executable.
 
-**NOTE:** The hook needs to be installed just once for each repository in which
-you will use it.
+**NOTE:** The hook needs to be initialized just once for each repository in
+which you will use it.
 
 ## Usage
 
-With the hook installed in a repository, create branches being sure to include
+With the hook initialized in a repository, create branches being sure to include
 the Pivotal Tracker story number in the branch name.
 
 ```bash

@@ -28,10 +28,10 @@ describe GitTracker::Runner do
     end
   end
 
-  describe '.install' do
-    it 'tells the hook to install itself' do
-      GitTracker::Hook.should_receive(:install)
-      runner.install
+  describe '.init' do
+    it 'tells the hook to initialize itself' do
+      GitTracker::Hook.should_receive(:init)
+      runner.init
     end
   end
 

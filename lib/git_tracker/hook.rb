@@ -4,11 +4,11 @@ module GitTracker
   class Hook
     attr_reader :hook_file
 
-    def self.install
-      install_at(Repository.root)
+    def self.init
+      init_at(Repository.root)
     end
 
-    def self.install_at(root)
+    def self.init_at(root)
       new(root).write
     end
 

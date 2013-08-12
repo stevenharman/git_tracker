@@ -14,8 +14,13 @@ module GitTracker
       PrepareCommitMessage.run(*args)
     end
 
+    def self.init
+      Hook.init
+    end
+
     def self.install
-      Hook.install
+      puts "`git-tracker install` is deprecated. Please use `git-tracker init`"
+      self.init
     end
 
     def self.test_command
