@@ -4,7 +4,7 @@ require 'git_tracker/hook'
 module GitTracker
   module Runner
 
-    def self.execute(cmd_arg, *args)
+    def self.execute(cmd_arg = 'help', *args)
       command = cmd_arg.gsub(/-/, '_')
       abort("[git_tracker] command: '#{cmd_arg}' does not exist.") unless respond_to?(command)
       send(command, *args)
