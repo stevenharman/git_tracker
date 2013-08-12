@@ -1,5 +1,12 @@
 ### dev
-[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.0...master)
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.1...master)
+
+### 1.6.1 / 2013-08-12
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.0...v1.6.1)
+
+Bug Fixes
+
+* Be sure to use Ruby 1.8 hash syntax.
 
 ### 1.6.0 / 2013-08-12
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.5.1...v1.6.0)
