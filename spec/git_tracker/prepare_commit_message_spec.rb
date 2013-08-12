@@ -37,7 +37,7 @@ describe GitTracker::PrepareCommitMessage do
 
   describe '#run' do
     let(:hook) { GitTracker::PrepareCommitMessage.new('FILE1') }
-    let(:commit_message) { double('CommitMessage', append: nil) }
+    let(:commit_message) { double('CommitMessage', :append => nil) }
 
     before do
       GitTracker::Branch.stub(:story_number) { story }
