@@ -10,11 +10,12 @@ describe GitTracker::Hook do
   describe '.install' do
     before do
       GitTracker::Repository.stub(:root) { root }
+      hook.stub(:install_at)
     end
 
     it 'installs to the root of the Git repository' do
-      hook.should_receive(:install_at).with(root)
       hook.install
+      expect(hook).to have_received(:install_at).with(root)
     end
   end
 
@@ -25,8 +26,8 @@ describe GitTracker::Hook do
     end
 
     it 'writes the hook into the hooks directory' do
-      File.should_receive(:open).with(hook_path, 'w')
       hook.install_at(root)
+      expect(File).to have_received(:open).with(hook_path, 'w')
     end
 
     it 'makes the hook executable' do

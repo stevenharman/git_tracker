@@ -2,30 +2,30 @@ require 'git_tracker/repository'
 
 module GitTracker
   class Hook
+    attr_reader :hook_file
 
     def self.install
       install_at(Repository.root)
     end
 
     def self.install_at(root)
-      hook = hook_from(root)
-      write(hook)
+      new(root).write
     end
 
-    private
-
-    def self.hook_from(root)
-      File.join(root, '.git', 'hooks', 'prepare-commit-msg')
+    def initialize(root)
+      @hook_file = File.join(root, '.git', 'hooks', 'prepare-commit-msg')
     end
 
-    def self.write(hook)
-      File.open(hook, 'w') do |f|
+    def write
+      File.open(hook_file, 'w') do |f|
         f.write(hook_body)
         f.chmod(0755)
       end
     end
 
-    def self.hook_body
+    private
+
+    def hook_body
       return <<-HOOK
 #!/usr/bin/env bash
 
