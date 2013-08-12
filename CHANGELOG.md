@@ -1,5 +1,15 @@
 ### dev
-[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.5.1...master)
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.0...master)
+
+### 1.6.0 / 2013-08-12
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.5.1...v1.6.0)
+
+Enhancements
+
+* Add and default to `help` command. [Issue
+  #15](https://github.com/stevenharman/git_tracker/issues/15)
+* Deprecate `git-tracker install` in favor of `git-tracker init` [Issue
+  #13](https://github.com/stevenharman/git_tracker/issues/13)
 
 ### 1.5.1 / 2013-02-02
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.4.0...v1.5.1)
