@@ -24,7 +24,7 @@ module GitTracker
     end
 
     def self.test_command
-      puts 'git-tracker is here. How are you?'
+      puts "git-tracker #{VERSION} is here. How are you?"
     end
   end
 
