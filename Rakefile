@@ -44,7 +44,7 @@ namespace :standalone do
       sh 'git pull -q origin master'
 
       formula_file = 'Library/Formula/git-tracker.rb'
-      sha = `curl -#L https://github.com/stevenharman/git_tracker/tarball/v#{GitTracker::VERSION} | shasum`.split(/\s+/).first
+      sha = `curl -#L https://github.com/stevenharman/git_tracker/archive/v#{GitTracker::VERSION}.tar.gz | shasum`.split(/\s+/).first
       abort unless $?.success? and sha.length == 40
 
       formula = File.read formula_file
