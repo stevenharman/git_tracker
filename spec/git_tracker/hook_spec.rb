@@ -9,8 +9,8 @@ describe GitTracker::Hook do
 
   describe '.init' do
     before do
-      GitTracker::Repository.stub(:root) { root }
-      hook.stub(:init_at)
+      allow(GitTracker::Repository).to receive(:root) { root }
+      allow(hook).to receive(:init_at)
     end
 
     it 'initializes to the root of the Git repository' do
@@ -22,7 +22,7 @@ describe GitTracker::Hook do
   describe '.init_at' do
     let(:fake_file) { GitTracker::FakeFile.new }
     before do
-      File.stub(:open).and_yield(fake_file)
+      allow(File).to receive(:open).and_yield(fake_file)
     end
 
     it 'writes the hook into the hooks directory' do

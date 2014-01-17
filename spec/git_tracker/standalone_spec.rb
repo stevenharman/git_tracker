@@ -68,17 +68,17 @@ describe GitTracker::Standalone do
   describe '#ruby_executable' do
     subject(:standalone) { described_class }
     before do
-      RbConfig::CONFIG.stub(:[]).with('bindir') { '/some/other/bin' }
-      RbConfig::CONFIG.stub(:[]).with('ruby_install_name') { 'ruby' }
+      allow(RbConfig::CONFIG).to receive(:[]).with('bindir') { '/some/other/bin' }
+      allow(RbConfig::CONFIG).to receive(:[]).with('ruby_install_name') { 'ruby' }
     end
 
     it 'uses user-level ruby binary when it is executable' do
-      File.stub(:executable?).with('/usr/bin/ruby') { true }
+      allow(File).to receive(:executable?).with('/usr/bin/ruby') { true }
       expect(standalone.ruby_executable).to eq('/usr/bin/ruby')
     end
 
     it 'uses rbconfig ruby when user-level ruby binary not executable' do
-      File.stub(:executable?).with('/usr/bin/ruby') { false }
+      allow(File).to receive(:executable?).with('/usr/bin/ruby') { false }
       expect(standalone.ruby_executable).to eq('/some/other/bin/ruby')
     end
   end

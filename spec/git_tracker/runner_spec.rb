@@ -7,11 +7,11 @@ describe GitTracker::Runner do
 
   describe '.execute' do
     before do
-      runner.stub(:prepare_commit_msg) { true }
+      allow(runner).to receive(:prepare_commit_msg) { true }
     end
 
     it 'runs the hook, passing the args' do
-      runner.should_receive(:prepare_commit_msg).with(*args) { true }
+      expect(runner).to receive(:prepare_commit_msg).with(*args) { true }
       runner.execute('prepare-commit-msg', *args)
     end
 
@@ -23,20 +23,20 @@ describe GitTracker::Runner do
 
   describe '.prepare_commit_msg' do
     it 'runs the hook, passing the args' do
-      GitTracker::PrepareCommitMessage.should_receive(:run).with(*args) { true }
+      expect(GitTracker::PrepareCommitMessage).to receive(:run).with(*args) { true }
       runner.prepare_commit_msg(*args)
     end
   end
 
   describe '.init' do
     it 'tells the hook to initialize itself' do
-      GitTracker::Hook.should_receive(:init)
+      expect(GitTracker::Hook).to receive(:init)
       runner.init
     end
   end
 
   it '.help reports that it was run' do
-    runner.should_receive(:puts).with(/git-tracker #{GitTracker::VERSION} is installed\./)
+    expect(runner).to receive(:puts).with(/git-tracker #{GitTracker::VERSION} is installed\./)
     runner.execute('help')
   end
 

@@ -13,7 +13,7 @@ describe GitTracker::CommitMessage do
   end
 
   def stub_commit_message(story_text)
-    File.stub(:read).with(file) { example_commit_message(story_text) }
+    allow(File).to receive(:read).with(file) { example_commit_message(story_text) }
   end
 
   describe '#keyword' do
@@ -92,10 +92,10 @@ describe GitTracker::CommitMessage do
   describe '#append' do
     let(:fake_file) { GitTracker::FakeFile.new }
     before do
-      File.stub(:open).and_yield(fake_file)
+      allow(File).to receive(:open).and_yield(fake_file)
     end
     def stub_original_commit_message(message)
-      File.stub(:read) { message }
+      allow(File).to receive(:read) { message }
     end
 
     it 'handles no existing message' do

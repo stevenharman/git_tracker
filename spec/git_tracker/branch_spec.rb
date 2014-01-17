@@ -6,21 +6,21 @@ describe GitTracker::Branch do
 
   def stub_branch(ref, exit_status = 0)
     allow_message_expectations_on_nil
-    branch.stub(:`) { ref }
-    $?.stub(:exitstatus) { exit_status }
+    allow(branch).to receive(:`) { ref }
+    allow($?).to receive(:exitstatus) { exit_status }
   end
 
   describe '.current' do
     it 'shells out to git, looking for the current HEAD' do
       stub_branch('refs/heads/herpty_derp_de')
-      branch.should_receive('`').with('git symbolic-ref HEAD')
+      expect(branch).to receive('`').with('git symbolic-ref HEAD')
       branch.current
     end
 
     it 'ensures in a Git repository when looking for HEAD exits with non-zero status' do
       stub_branch('', 128)
 
-      GitTracker::Repository.should_receive(:ensure_exists)
+      expect(GitTracker::Repository).to receive(:ensure_exists)
       branch.current
     end
   end

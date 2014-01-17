@@ -7,11 +7,11 @@ describe GitTracker::PrepareCommitMessage do
   describe '.run' do
     let(:hook) { double('PrepareCommitMessage') }
     before do
-      prepare_commit_message.stub(:new) { hook }
+      allow(prepare_commit_message).to receive(:new) { hook }
     end
 
     it 'runs the hook' do
-      hook.should_receive(:run)
+      expect(hook).to receive(:run)
       prepare_commit_message.run('FILE1', 'hook_source', 'sha1234')
     end
   end
@@ -40,8 +40,8 @@ describe GitTracker::PrepareCommitMessage do
     let(:commit_message) { double('CommitMessage', :append => nil) }
 
     before do
-      GitTracker::Branch.stub(:story_number) { story }
-      GitTracker::CommitMessage.stub(:new) { commit_message }
+      allow(GitTracker::Branch).to receive(:story_number) { story }
+      allow(GitTracker::CommitMessage).to receive(:new) { commit_message }
     end
 
     context 'with an existing commit (via `-c`, `-C`, or `--amend` options)' do
@@ -64,8 +64,8 @@ describe GitTracker::PrepareCommitMessage do
     context 'branch name with a Pivotal Tracker story number' do
       let(:story) { '8675309' }
       before do
-        commit_message.stub(:mentions_story?) { false }
-        commit_message.stub(:keyword) { nil }
+        allow(commit_message).to receive(:mentions_story?) { false }
+        allow(commit_message).to receive(:keyword) { nil }
       end
 
       it 'appends the number to the commit message' do
@@ -75,7 +75,7 @@ describe GitTracker::PrepareCommitMessage do
 
       context 'keyword mentioned in the commit message' do
         before do
-          commit_message.stub(:keyword) { 'Delivers' }
+          allow(commit_message).to receive(:keyword) { 'Delivers' }
         end
 
         it 'appends the keyword and the story number' do
@@ -86,7 +86,7 @@ describe GitTracker::PrepareCommitMessage do
 
       context 'number already mentioned in the commit message' do
         before do
-          commit_message.stub(:mentions_story?).with('8675309') { true }
+          allow(commit_message).to receive(:mentions_story?).with('8675309') { true }
         end
 
         it 'exits without updating the commit message' do
