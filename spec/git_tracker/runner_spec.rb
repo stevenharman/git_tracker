@@ -6,6 +6,8 @@ describe GitTracker::Runner do
   let(:args) { ['a_file', 'the_source', 'sha1234'] }
 
   describe '.execute' do
+    include OutputHelper
+
     before do
       allow(runner).to receive(:prepare_commit_msg) { true }
     end
@@ -15,9 +17,11 @@ describe GitTracker::Runner do
       runner.execute('prepare-commit-msg', *args)
     end
 
-    # TODO: stop the abort from writing to stderr during tests?
     it 'does not run hooks we do not know about' do
-      expect { runner.execute('non-existent-hook', *args) }.to_not succeed
+      errors = capture_stderr do
+        expect { runner.execute('non-existent-hook', *args) }.to_not succeed
+      end
+      expect(errors.chomp).to eq("[git_tracker] command: 'non-existent-hook' does not exist.")
     end
   end
 
