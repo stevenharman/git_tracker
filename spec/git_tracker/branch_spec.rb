@@ -46,6 +46,18 @@ describe GitTracker::Branch do
         stub_branch('refs/heads/stevenharman/got-her-number-8675309')
         expect(branch.story_number).to eq('8675309')
       end
+      
+      it 'finds the story in a branch with a version number' do
+        stub_branch('refs/heads/stevenharman/v2.0-got-her-number-8675309')
+        expect(branch.story_number).to eq('8675309')
+      end
+    end
+
+    context 'The current branch has a number that is not a story' do
+      it 'finds no story' do
+        stub_branch('refs/heads/a_very_descriptive_name_with_some_a_version_number_v2.0')
+        expect(branch.story_number).to_not be
+      end
     end
 
     context 'The current branch does not have a story number' do

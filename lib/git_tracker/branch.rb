@@ -4,7 +4,7 @@ require 'git_tracker/repository'
 module GitTracker
   module Branch
     def self.story_number
-      current[/#?(\d+)/, 1]
+      current[/#?(\d{6,10})/, 1]
     end
 
     def self.current
