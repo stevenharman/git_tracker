@@ -20,7 +20,7 @@ module GitTracker
     end
 
     def self.install
-      puts "`git-tracker install` is deprecated. Please use `git-tracker init`"
+      puts '`git-tracker install` is deprecated. Please use `git-tracker init`'
       self.init
     end
 
