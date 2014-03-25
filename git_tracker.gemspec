@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.name          = "git_tracker"
   gem.version       = GitTracker::VERSION
   gem.authors       = ["Steven Harman"]
-  gem.email         = ["steveharman@gmail.com"]
+  gem.email         = ['steven@harmanly.com']
   gem.homepage      = "https://github.com/stevenharman/git_tracker"
   gem.summary       = %q{Teaching Git about Pivotal Tracker.}
   gem.description   = <<-EOF
