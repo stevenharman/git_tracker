@@ -56,7 +56,7 @@ namespace :standalone do
       sh "git checkout -q -B #{branch}"
       sh "git commit -m 'upgrade git-tracker to v#{GitTracker::VERSION}' -- #{formula_file}"
       sh "git push -u stevenharman #{branch}"
-      sh "hub pull-request 'upgrade git-tracker to v#{GitTracker::VERSION}'"
+      sh "hub pull-request -m 'upgrade git-tracker to v#{GitTracker::VERSION}'"
 
       sh 'git checkout -q master'
     end
