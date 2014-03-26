@@ -1,5 +1,16 @@
 ### dev
-[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.1...master)
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.2...master)
+
+
+
+### 1.6.2 / 2014-03-26
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.1...v1.6.2)
+
+Bug Fixes
+
+* Restrict Tracker story numbers to be 6-10 digits long. [Issue
+  #16](https://github.com/stevenharman/git_tracker/pull/16) ([Benjamin
+  Darfler](https://github.com/bdarfler))
 
 ### 1.6.1 / 2013-08-12
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.0...v1.6.1)
@@ -56,7 +67,8 @@ Bug fixes
 
 Enhancements
 
-* Allow Pivotal Tracker keyword states: `Delivers` and `Fixes` [KensoDev](https://github.com/KensoDev)
+* Allow Pivotal Tracker keyword states: `Delivers` and `Fixes`
+  ([KensoDev](https://github.com/KensoDev))
 
 Bug fixes
 
