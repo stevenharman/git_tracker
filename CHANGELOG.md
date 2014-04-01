@@ -1,7 +1,12 @@
 ### dev
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.2...master)
 
+### 1.6.3 / 2014-03-31
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.2...v1.6.3)
 
+Bug Fixes
+
+* Removew binstubs from packaged gem. Oops!
 
 ### 1.6.2 / 2014-03-26
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.1...v1.6.2)
