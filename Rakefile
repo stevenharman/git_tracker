@@ -39,7 +39,8 @@ namespace :standalone do
   end
 
   task :homebrew do
-    Dir.chdir `brew --prefix`.chomp do
+    brew_dir = Bundler.with_clean_env { `brew --prefix` }.chomp
+    Dir.chdir brew_dir do
       sh 'git checkout -q master'
       sh 'git pull -q origin master'
 
