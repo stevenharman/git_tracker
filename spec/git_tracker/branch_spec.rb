@@ -46,7 +46,7 @@ describe GitTracker::Branch do
         stub_branch('refs/heads/stevenharman/got-her-number-8675309')
         expect(branch.story_number).to eq('8675309')
       end
-      
+
       it 'finds the story in a branch with a version number' do
         stub_branch('refs/heads/stevenharman/v2.0-got-her-number-8675309')
         expect(branch.story_number).to eq('8675309')

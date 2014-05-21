@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
     better... and easier... um, besier!
   EOF
 
-  gem.add_development_dependency 'rspec', '~> 2.14'
+  gem.add_development_dependency 'rspec', '~> 3.0.0.rc1'
   gem.add_development_dependency 'activesupport', '~> 3.2'
   gem.add_development_dependency 'pry', '~> 0.9.11'
   # Use Rake < 10.2 (requires Ruby 1.9+) until we drop Ruby 1.8.7 support
