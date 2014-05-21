@@ -29,5 +29,9 @@ RSpec::Matchers.define :succeed do
     0
   end
 
+  def supports_block_expectations?
+    true
+  end
+
 end
 
