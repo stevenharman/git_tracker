@@ -15,6 +15,8 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'rspec', '~> 3.2.0'
   gem.add_development_dependency 'activesupport', '~> 3.2'
+  # Use i18n < 0.7 until we drop Ruby 1.8.7 and 1.9.2 support
+  gem.add_development_dependency 'i18n', '~> 0.6.11'
   gem.add_development_dependency 'pry', '~> 0.10.1'
   # Use Rake < 10.2 (requires Ruby 1.9+) until we drop Ruby 1.8.7 support
   gem.add_development_dependency 'rake', '~> 10.1.1'
