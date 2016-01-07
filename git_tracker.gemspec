@@ -24,5 +24,7 @@ Gem::Specification.new do |gem|
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.executables   = %w(git-tracker)
+  gem.platform      = Gem::Platform::RUBY
   gem.require_paths = ['lib']
+  gem.required_ruby_version = '>= 1.9.3'
 end
