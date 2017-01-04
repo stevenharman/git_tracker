@@ -39,7 +39,9 @@ describe GitTracker::Hook do
       hook_code = <<-HOOK_CODE.strip_heredoc
         #!/usr/bin/env bash
 
-        git-tracker prepare-commit-msg "$@"
+        if command -v git-tracker >/dev/null; then
+            git-tracker prepare-commit-msg "$@"
+        fi
 
       HOOK_CODE
 
