@@ -20,6 +20,8 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'pry', '~> 0.10.1'
   # Use Rake < 10.2 (requires Ruby 1.9+) until we drop Ruby 1.8.7 support
   gem.add_development_dependency 'rake', '~> 10.1.1'
+  # Use json < 2.0 (requires Ruby 2.0+) until we drop Ruby < 2.0 support
+  gem.add_development_dependency "json", "< 2" if RUBY_VERSION < "2"
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
