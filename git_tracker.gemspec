@@ -14,9 +14,14 @@ Gem::Specification.new do |gem|
   EOF
 
   gem.add_development_dependency 'rspec', '~> 3.5'
-  gem.add_development_dependency 'activesupport', '~> 4.0'
   gem.add_development_dependency 'pry', '~> 0.10'
   gem.add_development_dependency 'rake', '~> 12.0'
+
+  if RUBY_VERSION >= '2.2.2'
+    gem.add_development_dependency 'activesupport', '~> 5.0'
+  else
+    gem.add_development_dependency 'activesupport', '~> 4.0'
+  end
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
