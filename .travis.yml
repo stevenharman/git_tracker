@@ -8,3 +8,5 @@ sudo: false
 addons:
   code_climate:
     repo_token: d08131691091072810c086f65d42c36ba7ea3241629c643caa363cbc966bbb23
+after_success:
+  - bundle exec codeclimate-test-reporter
