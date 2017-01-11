@@ -4,11 +4,11 @@ describe GitTracker::Standalone do
 
   describe '#save' do
     before do
-      File.delete 'git-tracker' if File.exists? 'git-tracker'
+      File.delete 'git-tracker' if File.exist? 'git-tracker'
     end
 
     after do
-      File.delete 'git-tracker' if File.exists? 'git-tracker'
+      File.delete 'git-tracker' if File.exist? 'git-tracker'
     end
 
     it 'saves to the named file' do
