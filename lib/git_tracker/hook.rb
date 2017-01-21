@@ -29,7 +29,9 @@ module GitTracker
       return <<-HOOK
 #!/usr/bin/env bash
 
-git-tracker prepare-commit-msg "$@"
+if command -v git-tracker >/dev/null; then
+    git-tracker prepare-commit-msg "$@"
+fi
 
       HOOK
     end
