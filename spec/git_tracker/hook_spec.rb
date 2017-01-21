@@ -40,7 +40,7 @@ describe GitTracker::Hook do
         #!/usr/bin/env bash
 
         if command -v git-tracker >/dev/null; then
-            git-tracker prepare-commit-msg "$@"
+          git-tracker prepare-commit-msg "$@"
         fi
 
       HOOK_CODE
