@@ -1,5 +1,20 @@
 ### dev
-[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.2...master)
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v2.0.0...master)
+
+### 2.0.0 / 2017-01-21
+[full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.3...v2.0.0)
+
+Breaking Changes
+
+* Drop official support of EOL Rubies (e.g., 1.8.7, 1.9, and 2.0).
+  Everything should still work fine, but that will change in the future.
+
+Bug Fixes
+
+* Only call `git-tracker` from the hook if the command exists.
+  Fixes errors in GUI Git clients with a PATH that doesn't include the `git-tracker` install location.
+  e.g., GitHub Desktop.
+  [Issue #21](https://github.com/stevenharman/git_tracker/pull/21) ([D. Flaherty](https://github.com/flats))
 
 ### 1.6.3 / 2014-03-31
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.2...v1.6.3)
