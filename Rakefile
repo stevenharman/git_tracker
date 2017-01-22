@@ -39,27 +39,9 @@ namespace :standalone do
   end
 
   task :homebrew do
-    brew_dir = Bundler.with_clean_env { `brew --prefix` }.chomp
-    Dir.chdir brew_dir do
-      sh 'git checkout -q master'
-      sh 'git pull -q origin master'
-
-      formula_file = 'Library/Formula/git-tracker.rb'
-      sha = `curl -#L https://github.com/stevenharman/git_tracker/archive/v#{GitTracker::VERSION}.tar.gz | shasum`.split(/\s+/).first
-      abort unless $?.success? and sha.length == 40
-
-      formula = File.read formula_file
-      formula.sub! /\bv\d+(\.\d+)*/, "v#{GitTracker::VERSION}"
-      formula.sub! /\b[0-9a-f]{40}\b/, sha
-      File.open(formula_file, 'w') {|f| f << formula }
-
-      branch = "git_tracker-v#{GitTracker::VERSION}"
-      sh "git checkout -q -B #{branch}"
-      sh "git commit -m 'git-tracker #{GitTracker::VERSION}' -- #{formula_file}"
-      sh "git push -u stevenharman #{branch}"
-      sh "hub pull-request -m 'git-tracker #{GitTracker::VERSION}'"
-
-      sh 'git checkout -q master'
+    archive_url = "https://github.com/stevenharman/git_tracker/archive/v#{GitTracker::VERSION}.tar.gz"
+    Bundler.with_clean_env do
+      sh "brew bump-formula-pr git-tracker --url=#{archive_url}"
     end
   end
 end
