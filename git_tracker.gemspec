@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
     better... and easier... um, besier!
   EOF
 
-  spec.add_development_dependency "rspec", "~> 3.5"
-  spec.add_development_dependency "pry", "~> 0.10"
+  spec.add_development_dependency "rspec", "~> 3.8"
+  spec.add_development_dependency "pry", "~> 0.12"
   spec.add_development_dependency "rake", "~> 12.0"
   spec.add_development_dependency "simplecov", "~> 0.16"
 
@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.executables   = %w[git-tracker]
   spec.platform      = Gem::Platform::RUBY
   spec.require_paths = ["lib"]
-  spec.required_ruby_version = ">= 2.1.0"
+  spec.required_ruby_version = ">= 2.4.0"
 end

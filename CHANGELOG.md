@@ -1,6 +1,10 @@
 ### dev
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v2.0.0...master)
 
+Breaking Changes
+
+* Drop official support of EOL Rubies (2.1, 2.2, and 2.3); 2.4+ officially supported.
+
 ### 2.0.0 / 2017-01-21
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.3...v2.0.0)
 
@@ -21,7 +25,7 @@ Bug Fixes
 
 Bug Fixes
 
-* Removew binstubs from packaged gem. Oops!
+* Remove binstubs from packaged gem. Oops!
 
 ### 1.6.2 / 2014-03-26
 [full changelog](https://github.com/stevenharman/git_tracker/compare/v1.6.1...v1.6.2)

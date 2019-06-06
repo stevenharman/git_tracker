@@ -3,15 +3,15 @@ module GitTracker
     extend self
 
     GIT_TRACKER_ROOT = File.expand_path("../../..", __FILE__)
-    PREAMBLE = <<-DOC
-#
-# This file is generated code. DO NOT send patches for it.
-#
-# Original source files with comments are at:
-# https://github.com/stevenharman/git_tracker
-#
+    PREAMBLE = <<~DOC
+      #
+      # This file is generated code. DO NOT send patches for it.
+      #
+      # Original source files with comments are at:
+      # https://github.com/stevenharman/git_tracker
+      #
 
-DOC
+    DOC
 
     def save(filename, path = ".")
       dest = File.join(File.expand_path(path), filename)
