@@ -2,8 +2,8 @@ module GitTracker
   module Standalone
     extend self
 
-    GIT_TRACKER_ROOT = File.expand_path('../../..', __FILE__)
-    PREAMBLE = <<-preamble
+    GIT_TRACKER_ROOT = File.expand_path("../../..", __FILE__)
+    PREAMBLE = <<-DOC
 #
 # This file is generated code. DO NOT send patches for it.
 #
@@ -11,13 +11,13 @@ module GitTracker
 # https://github.com/stevenharman/git_tracker
 #
 
-preamble
+DOC
 
-    def save(filename, path = '.')
+    def save(filename, path = ".")
       dest = File.join(File.expand_path(path), filename)
-      File.open(dest, 'w') do |f|
+      File.open(dest, "w") do |f|
         build(f)
-        f.chmod(0755)
+        f.chmod(0o755)
       end
     end
 
@@ -26,20 +26,20 @@ preamble
       io << PREAMBLE
 
       each_source_file do |filename|
-        File.open(filename, 'r') do |source|
+        File.open(filename, "r") do |source|
           inline_source(source, io)
         end
       end
 
-      io.puts 'GitTracker::Runner.execute(*ARGV)'
+      io.puts "GitTracker::Runner.execute(*ARGV)"
       io
     end
 
     def ruby_executable
-      if File.executable? '/usr/bin/ruby' then '/usr/bin/ruby'
+      if File.executable? "/usr/bin/ruby" then "/usr/bin/ruby"
       else
-        require 'rbconfig'
-        File.join(RbConfig::CONFIG['bindir'], RbConfig::CONFIG['ruby_install_name'])
+        require "rbconfig"
+        File.join(RbConfig::CONFIG["bindir"], RbConfig::CONFIG["ruby_install_name"])
       end
     end
 
@@ -49,7 +49,7 @@ preamble
       code.each_line do |line|
         io << line unless require_own_file?(line)
       end
-      io.puts ''
+      io.puts ""
     end
 
     def require_own_file?(line)
@@ -57,14 +57,13 @@ preamble
     end
 
     def each_source_file
-      File.open(File.join(GIT_TRACKER_ROOT, 'lib/git_tracker.rb'), 'r') do |main|
+      File.open(File.join(GIT_TRACKER_ROOT, "lib/git_tracker.rb"), "r") do |main|
         main.each_line do |req|
           if req =~ /^require\s+["'](.+)["']/
-            yield File.join(GIT_TRACKER_ROOT, 'lib', "#{$1}.rb")
+            yield File.join(GIT_TRACKER_ROOT, "lib", "#{$1}.rb")
           end
         end
       end
     end
-
   end
 end

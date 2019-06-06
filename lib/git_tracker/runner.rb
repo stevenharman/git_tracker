@@ -1,12 +1,11 @@
-require 'git_tracker/prepare_commit_message'
-require 'git_tracker/hook'
-require 'git_tracker/version'
+require "git_tracker/prepare_commit_message"
+require "git_tracker/hook"
+require "git_tracker/version"
 
 module GitTracker
   module Runner
-
-    def self.execute(cmd_arg = 'help', *args)
-      command = cmd_arg.gsub(/-/, '_')
+    def self.execute(cmd_arg = "help", *args)
+      command = cmd_arg.tr("-", "_")
       abort("[git_tracker] command: '#{cmd_arg}' does not exist.") unless respond_to?(command)
       send(command, *args)
     end
@@ -20,20 +19,19 @@ module GitTracker
     end
 
     def self.install
-      puts '`git-tracker install` is deprecated. Please use `git-tracker init`'
-      self.init
+      puts "`git-tracker install` is deprecated. Please use `git-tracker init`"
+      init
     end
 
     def self.help
-      puts <<-HELP
-git-tracker #{VERSION} is installed.
+      puts <<~HELP
+        git-tracker #{VERSION} is installed.
 
-Remember, git-tracker is a hook which Git interacts with during its normal
-lifecycle of committing, rebasing, merging, etc. You need to initialize this
-hook by running `git-tracker init` from each repository in which you wish to
-use it. Cheers!
+        Remember, git-tracker is a hook which Git interacts with during its normal
+        lifecycle of committing, rebasing, merging, etc. You need to initialize this
+        hook by running `git-tracker init` from each repository in which you wish to
+        use it. Cheers!
       HELP
     end
   end
-
 end

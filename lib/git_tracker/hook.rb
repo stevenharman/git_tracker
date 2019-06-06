@@ -1,4 +1,4 @@
-require 'git_tracker/repository'
+require "git_tracker/repository"
 
 module GitTracker
   class Hook
@@ -13,28 +13,27 @@ module GitTracker
     end
 
     def initialize(root)
-      @hook_file = File.join(root, '.git', 'hooks', 'prepare-commit-msg')
+      @hook_file = File.join(root, ".git", "hooks", "prepare-commit-msg")
     end
 
     def write
-      File.open(hook_file, 'w') do |f|
+      File.open(hook_file, "w") do |f|
         f.write(hook_body)
-        f.chmod(0755)
+        f.chmod(0o755)
       end
     end
 
     private
 
     def hook_body
-      return <<-HOOK
-#!/usr/bin/env bash
+      <<~HOOK
+        #!/usr/bin/env bash
 
-if command -v git-tracker >/dev/null; then
-  git-tracker prepare-commit-msg "$@"
-fi
+        if command -v git-tracker >/dev/null; then
+          git-tracker prepare-commit-msg "$@"
+        fi
 
       HOOK
     end
-
   end
 end

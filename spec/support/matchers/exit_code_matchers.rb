@@ -1,4 +1,4 @@
-require 'rspec/expectations'
+require "rspec/expectations"
 
 RSpec::Matchers.define :succeed do
   actual = nil
@@ -9,12 +9,12 @@ RSpec::Matchers.define :succeed do
     rescue SystemExit => e
       actual = e.status
     end
-    actual and actual == successful_exit_code
+    actual && (actual == successful_exit_code)
   end
 
   failure_message do |block|
     "expected block to call exit(#{successful_exit_code}) but exit" +
-      (actual.nil? ? ' not called' : "(#{actual}) was called")
+      (actual.nil? ? " not called" : "(#{actual}) was called")
   end
 
   failure_message_when_negated do |block|
@@ -32,6 +32,4 @@ RSpec::Matchers.define :succeed do
   def supports_block_expectations?
     true
   end
-
 end
-

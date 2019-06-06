@@ -1,7 +1,6 @@
 module CommitMessageHelper
-
   def example_commit_message(pattern_to_match)
-    return <<-EXAMPLE
+    <<-EXAMPLE
 Got Jenny's number, gonna' make her mine!
 
 #{pattern_to_match}
@@ -17,4 +16,3 @@ Got Jenny's number, gonna' make her mine!
 EXAMPLE
   end
 end
-

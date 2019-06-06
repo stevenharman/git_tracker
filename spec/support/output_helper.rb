@@ -1,4 +1,4 @@
-require 'stringio'
+require "stringio"
 
 module OutputHelper
   def capture_stderr

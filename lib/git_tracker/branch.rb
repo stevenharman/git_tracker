@@ -1,5 +1,5 @@
-require 'English'
-require 'git_tracker/repository'
+require "English"
+require "git_tracker/repository"
 
 module GitTracker
   module Branch
@@ -12,13 +12,13 @@ module GitTracker
 
       Repository.ensure_exists unless exit_successful?
 
-      branch_path[%r{refs/heads/(.+)}, 1] || ''
+      branch_path[%r{refs/heads/(.+)}, 1] || ""
     end
-
-    private
 
     def self.exit_successful?
       $CHILD_STATUS.exitstatus == 0
     end
+
+    private_class_method :exit_successful?
   end
 end
