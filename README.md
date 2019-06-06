@@ -1,9 +1,9 @@
 # GitTracker
 
-[![Gem Version](http://img.shields.io/gem/v/git_tracker.svg)](https://rubygems.org/gems/git_tracker)
-[![Build Status](https://img.shields.io/travis/stevenharman/git_tracker.svg)](https://travis-ci.org/stevenharman/git_tracker)
-[![Code Climate](http://img.shields.io/codeclimate/github/stevenharman/git_tracker.svg)](https://codeclimate.com/github/stevenharman/git_tracker)
-[![Dependency Status](https://img.shields.io/gemnasium/stevenharman/git_tracker.svg)](https://gemnasium.com/stevenharman/git_tracker)
+[![Gem Version](https://badge.fury.io/rb/git_tracker.svg)](https://badge.fury.io/rb/git_tracker)
+[![Build Status](https://travis-ci.org/stevenharman/git_tracker.svg?branch=master)](https://travis-ci.org/stevenharman/git_tracker)
+[![Maintainability](https://api.codeclimate.com/v1/badges/de85f5c6634d8e69c69a/maintainability)](https://codeclimate.com/github/stevenharman/git_tracker/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/de85f5c6634d8e69c69a/test_coverage)](https://codeclimate.com/github/stevenharman/git_tracker/test_coverage)
 
 *GitTracker*, or *git-tracker*, is a Git hook that will scan your current
 branch name looking for something it recognizes as a [Pivotal Tracker][pt]
