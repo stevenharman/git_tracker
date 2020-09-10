@@ -15,7 +15,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.8"
   spec.add_development_dependency "pry", "~> 0.12"
   spec.add_development_dependency "rake", "~> 12.0"
-  spec.add_development_dependency "simplecov", "~> 0.16"
+  # Simplecov 0.18+ is currently broken for the cc-test-reporter.
+  # Until it's fixed, we need to stick to something pre-0.18
+  # see: https://github.com/codeclimate/test-reporter/issues/413
+  spec.add_development_dependency "simplecov", "~> 0.17.0"
 
   if RUBY_VERSION >= "2.2.2"
     spec.add_development_dependency "activesupport", "~> 5.0"
