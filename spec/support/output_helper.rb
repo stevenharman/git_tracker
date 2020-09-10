@@ -5,8 +5,8 @@ module OutputHelper
     old_out, new_out = $stderr, StringIO.new
     $stderr = new_out
     yield
+    new_out.string
   ensure
     $stderr = old_out
-    return new_out.string
   end
 end
