@@ -3,7 +3,6 @@
 .ruby-version
 Gemfile.lock
 coverage
-bin/autospec
 bin/rspec
 bin/rake
 doc/
