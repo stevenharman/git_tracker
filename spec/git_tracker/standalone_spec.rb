@@ -1,6 +1,6 @@
 require "git_tracker/standalone"
 
-describe GitTracker::Standalone do
+RSpec.describe GitTracker::Standalone do
   describe "#save" do
     before do
       File.delete "git-tracker" if File.exist? "git-tracker"

@@ -1,14 +1,19 @@
-*.gem
-.bundle
-.ruby-version
-Gemfile.lock
-coverage
-bin/rspec
-bin/rake
-doc/
-lib/bundler/man
-/git-tracker
-pkg
-rdoc
-tmp
-tags
+# Ignore all log/temp/etc... files
+/log/
+/tmp/
+/tags
+
+# Package and dependency caches
+/.ruby-version
+/.bundle
+/Gemfile.lock
+/pkg/
+
+# Generated documentation
+/.yardoc
+/_yardoc/
+
+# Spec reports and failure tracking
+/coverage/
+/spec/rspec-status.txt
+/spec/reports/

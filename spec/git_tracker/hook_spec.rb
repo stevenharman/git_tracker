@@ -1,8 +1,7 @@
-require "spec_helper"
 require "git_tracker/hook"
 require "active_support/core_ext/string/strip"
 
-describe GitTracker::Hook do
+RSpec.describe GitTracker::Hook do
   subject(:hook) { described_class }
   let(:root) { "/path/to/git/repo/toplevel" }
   let(:hook_path) { File.join(root, ".git", "hooks", "prepare-commit-msg") }

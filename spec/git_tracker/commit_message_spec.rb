@@ -1,8 +1,7 @@
-require "spec_helper"
 require "git_tracker/commit_message"
 require "active_support/core_ext/string/strip"
 
-describe GitTracker::CommitMessage do
+RSpec.describe GitTracker::CommitMessage do
   include CommitMessageHelper
 
   subject(:commit_message) { described_class.new(file) }

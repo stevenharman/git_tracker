@@ -1,3 +1,2 @@
 --colour
--I spec/support
--r pry
+--require spec_helper

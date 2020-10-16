@@ -1,7 +1,6 @@
-require "spec_helper"
 require "git_tracker/prepare_commit_message"
 
-describe GitTracker::PrepareCommitMessage do
+RSpec.describe GitTracker::PrepareCommitMessage do
   subject(:prepare_commit_message) { GitTracker::PrepareCommitMessage }
 
   describe ".run" do

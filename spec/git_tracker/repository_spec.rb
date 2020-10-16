@@ -1,7 +1,6 @@
-require "spec_helper"
 require "git_tracker/repository"
 
-describe GitTracker::Repository do
+RSpec.describe GitTracker::Repository do
   subject(:repository) { described_class }
   let(:git_command) { "git rev-parse --show-toplevel" }
   before do

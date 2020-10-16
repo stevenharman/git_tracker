@@ -1,7 +1,6 @@
-require "spec_helper"
 require "git_tracker/branch"
 
-describe GitTracker::Branch do
+RSpec.describe GitTracker::Branch do
   subject(:branch) { described_class }
 
   def stub_branch(ref, exit_status = 0)
