@@ -32,7 +32,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.platform = Gem::Platform::RUBY
 
-  spec.add_development_dependency "activesupport", "~> 6.0"
+  if RUBY_VERSION >= "2.5.0"
+    spec.add_development_dependency "activesupport", "~> 6.0"
+  else
+    spec.add_development_dependency "activesupport", "~> 5.0"
+  end
   spec.add_development_dependency "pry-byebug", "~> 3.9"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.9"
