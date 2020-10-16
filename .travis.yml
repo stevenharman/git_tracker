@@ -1,8 +1,9 @@
+dist: xenial
+language: ruby
+cache: bundler
 env:
   global:
     - CC_TEST_REPORTER_ID=d08131691091072810c086f65d42c36ba7ea3241629c643caa363cbc966bbb23
-dist: xenial
-language: ruby
 rvm:
   - 2.4
   - 2.5
