@@ -12,7 +12,7 @@ RSpec.describe GitTracker::Runner do
     end
 
     it "runs the hook, passing the args" do
-      expect(runner).to receive(:prepare_commit_msg).with(*args) { true }
+      expect(runner).to receive(:prepare_commit_msg).with(*args)
       runner.execute("prepare-commit-msg", *args)
     end
 
@@ -26,14 +26,17 @@ RSpec.describe GitTracker::Runner do
 
   describe ".prepare_commit_msg" do
     it "runs the hook, passing the args" do
-      expect(GitTracker::PrepareCommitMessage).to receive(:run).with(*args) { true }
+      expect(GitTracker::PrepareCommitMessage).to receive(:run).with(*args)
       runner.prepare_commit_msg(*args)
     end
   end
 
   describe ".init" do
+    let(:repo_root) { "/path/to/git/repo/root" }
+
     it "tells the hook to initialize itself" do
-      expect(GitTracker::Hook).to receive(:init)
+      allow(GitTracker::Repository).to receive(:root) { repo_root }
+      expect(GitTracker::Hook).to receive(:init).with(at: repo_root)
       runner.init
     end
   end

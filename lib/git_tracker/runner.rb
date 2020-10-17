@@ -1,12 +1,15 @@
 require "git_tracker/prepare_commit_message"
 require "git_tracker/hook"
+require "git_tracker/repository"
 require "git_tracker/version"
 
 module GitTracker
   module Runner
     def self.execute(cmd_arg = "help", *args)
       command = cmd_arg.tr("-", "_")
+
       abort("[git_tracker] command: '#{cmd_arg}' does not exist.") unless respond_to?(command)
+
       send(command, *args)
     end
 
@@ -15,7 +18,7 @@ module GitTracker
     end
 
     def self.init
-      Hook.init
+      Hook.init(at: Repository.root)
     end
 
     def self.install
