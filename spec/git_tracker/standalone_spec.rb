@@ -63,23 +63,4 @@ RSpec.describe GitTracker::Standalone do
       expect(standalone_script).to_not match(/^require\s+["']git_tracker/)
     end
   end
-
-  describe "#ruby_executable" do
-    subject(:standalone) { described_class }
-
-    before do
-      allow(RbConfig::CONFIG).to receive(:[]).with("bindir") { "/some/other/bin" }
-      allow(RbConfig::CONFIG).to receive(:[]).with("ruby_install_name") { "ruby" }
-    end
-
-    it "uses user-level ruby binary when it is executable" do
-      allow(File).to receive(:executable?).with("/usr/bin/ruby") { true }
-      expect(standalone.ruby_executable).to eq("/usr/bin/ruby")
-    end
-
-    it "uses rbconfig ruby when user-level ruby binary not executable" do
-      allow(File).to receive(:executable?).with("/usr/bin/ruby") { false }
-      expect(standalone.ruby_executable).to eq("/some/other/bin/ruby")
-    end
-  end
 end
