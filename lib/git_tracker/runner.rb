@@ -19,7 +19,8 @@ module GitTracker
     end
 
     def self.install
-      puts "`git-tracker install` is deprecated. Please use `git-tracker init`"
+      warn("`git-tracker install` is deprecated. Please use `git-tracker init`", uplevel: 1)
+
       init
     end
 
