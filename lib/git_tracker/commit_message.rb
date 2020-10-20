@@ -6,7 +6,7 @@ module GitTracker
     end
 
     def mentions_story?(number)
-      @message =~ /^(?!#).*\[(\w+\s)?(#\d+\s)*##{number}(\s#\d+)*(\s\w+)?\]/io
+      @message =~ /^(?!#).*\[(\w+\s)?(#\d+\s)*##{number}(\s#\d+)*(\s\w+)?\]/i
     end
 
     def keyword
