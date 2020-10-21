@@ -3,6 +3,7 @@ require "git_tracker/repository"
 RSpec.describe GitTracker::Repository do
   subject(:repository) { described_class }
   let(:git_command) { "git rev-parse --show-toplevel" }
+
   before do
     allow_message_expectations_on_nil
     allow(repository).to receive(:`).with(git_command) { "/path/to/git/repo/root\n" }

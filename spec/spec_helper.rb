@@ -5,7 +5,6 @@ end
 
 require "pry-byebug"
 require_relative "support/commit_message_helper"
-require_relative "support/fake_file"
 require_relative "support/output_helper"
 require_relative "support/matchers/exit_code_matchers"
 
