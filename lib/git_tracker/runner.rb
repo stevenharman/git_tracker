@@ -5,7 +5,7 @@ require "git_tracker/version"
 
 module GitTracker
   module Runner
-    def self.execute(cmd_arg = "help", *args)
+    def self.call(cmd_arg = "help", *args)
       command = cmd_arg.tr("-", "_")
 
       abort("[git_tracker] command: '#{cmd_arg}' does not exist.") unless respond_to?(command)
@@ -14,7 +14,7 @@ module GitTracker
     end
 
     def self.prepare_commit_msg(*args)
-      PrepareCommitMessage.run(*args)
+      PrepareCommitMessage.call(*args)
     end
 
     def self.init

@@ -22,7 +22,7 @@ module GitTracker
         end
       end
 
-      io.puts("GitTracker::Runner.execute(*ARGV)")
+      io.puts("GitTracker::Runner.call(*ARGV)")
       io
     end
 

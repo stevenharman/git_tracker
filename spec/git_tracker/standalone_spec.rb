@@ -55,8 +55,8 @@ RSpec.describe GitTracker::Standalone do
       expect(standalone_script).to_not include("module Standalone")
     end
 
-    it "includes the call to execute the hook" do
-      expect(standalone_script).to include("GitTracker::Runner.execute(*ARGV)")
+    it "includes the call to call the hook" do
+      expect(standalone_script).to include("GitTracker::Runner.call(*ARGV)")
     end
 
     it "excludes requiring git_tracker code" do

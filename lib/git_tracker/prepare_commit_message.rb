@@ -5,8 +5,8 @@ module GitTracker
   class PrepareCommitMessage
     attr_reader :file, :source, :commit_sha
 
-    def self.run(file, source = nil, commit_sha = nil)
-      new(file, source, commit_sha).run
+    def self.call(file, source = nil, commit_sha = nil)
+      new(file, source, commit_sha).call
     end
 
     def initialize(file, source = nil, commit_sha = nil)
@@ -15,7 +15,7 @@ module GitTracker
       @commit_sha = commit_sha
     end
 
-    def run
+    def call
       exit_when_commit_exists
 
       story = story_number_from_branch
