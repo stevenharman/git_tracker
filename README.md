@@ -51,7 +51,7 @@ With the hook initialized in a repository, create branches being sure to include
 the Pivotal Tracker story number in the branch name.
 
 ```bash
-$ git checkout -b a_useful_and_helpful_name_8675309
+$ git switch -c best_feature_ever_8675309
 ```
 
 When you commit, Git will fire the hook which will find the story number in the
@@ -59,7 +59,7 @@ branch name and prepare your commit message so that it includes the story number
 in the [special Pivotal Tracker syntax][pt-format].
 
 ```bash
-# on branch named `best_feature_ever-8675309`
+# on branch named `best_feature_ever_8675309`
 $ git commit
 ```
 
@@ -72,7 +72,7 @@ the top)*
 [#8675309]
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-# On branch best_feature_ever-8675309
+# On branch best_feature_ever_8675309
 # Changes to be committed:
 #   (use "git reset HEAD <file>..." to unstage)
 #
@@ -89,7 +89,7 @@ If you pass a commit message on the command line the hook will still add the
 story number, preceded by an empty line, to the end of your message.
 
 ```bash
-# on branch named `best_feature_ever-8675309`
+# on branch named `best_feature_ever_8675309`
 $ git commit -m'Look at this rad code, yo!'
 ```
 
@@ -105,7 +105,7 @@ However, if you include the story number in the Pivotal Tracker format within
 your commit message, the hook will do nothing.
 
 ```bash
-# on branch named `best_feature_ever-8675309`
+# on branch named `best_feature_ever_8675309`
 $ git commit -m'[#8675309] Look at this rad code, yo!'
 ```
 
@@ -156,11 +156,10 @@ name, optionally prefixing it with a hash (`#`). Examples:
 ## Contributing :octocat:
 
 1. Fork it
-2. Create your feature branch (`git checkout -b my_new_feature`)
+2. Create your feature branch (`git switch -c my_new_feature`)
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my_new_feature`)
 5. Create new Pull Request
-
 
 [pt]: https://www.pivotaltracker.com/
 [pt-format]: https://www.pivotaltracker.com/help/api?version=v3#scm_post_commit_message_syntax
