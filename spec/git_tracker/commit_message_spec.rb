@@ -1,5 +1,4 @@
 require "git_tracker/commit_message"
-require "active_support/core_ext/string/strip"
 
 RSpec.describe GitTracker::CommitMessage do
   include CommitMessageHelper
@@ -90,15 +89,17 @@ RSpec.describe GitTracker::CommitMessage do
 
   describe "#append" do
     let(:fake_file) { GitTracker::FakeFile.new }
+
     before do
       allow(File).to receive(:open).and_yield(fake_file)
     end
+
     def stub_original_commit_message(message)
       allow(File).to receive(:read) { message }
     end
 
     it "handles no existing message" do
-      commit_message_text = <<-COMMIT_MESSAGE.strip_heredoc
+      commit_message_text = <<~COMMIT_MESSAGE
 
 
         [#8675309]
@@ -112,7 +113,7 @@ RSpec.describe GitTracker::CommitMessage do
     end
 
     it "preserves existing messages" do
-      commit_message_text = <<-COMMIT_MESSAGE.strip_heredoc
+      commit_message_text = <<~COMMIT_MESSAGE
         A first line
 
         With more here
@@ -128,7 +129,7 @@ RSpec.describe GitTracker::CommitMessage do
     end
 
     it "preserves line breaks in comments" do
-      commit_message_text = <<-COMMIT_MESSAGE.strip_heredoc
+      commit_message_text = <<~COMMIT_MESSAGE
 
 
         [#8675309]
