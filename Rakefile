@@ -1,5 +1,6 @@
 #!/usr/bin/env rake
-require File.expand_path("../lib/git_tracker/version", __FILE__)
+
+require Pathname(".").join("lib/git_tracker/version").expand_path
 
 # Skip these tasks when being installed by Homebrew
 unless ENV["HOMEBREW_BREW_FILE"]
@@ -19,22 +20,26 @@ unless ENV["HOMEBREW_BREW_FILE"]
 end
 
 # standalone and Homebrew
-file "git-tracker" => FileList.new("lib/git_tracker.rb", "lib/git_tracker/*.rb") do |task|
-  $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+directory "pkg"
+
+file "pkg/git-tracker" => Rake::FileList.new("pkg", "lib/git_tracker.rb", "lib/git_tracker/*.rb") do |task|
+  $LOAD_PATH.unshift(Pathname(__dir__).join("lib").expand_path)
   require "git_tracker/standalone"
-  GitTracker::Standalone.save(task.name)
+
+  path, filename = task.name.split("/")
+  GitTracker::Standalone.save(filename, path: path)
 end
 
 namespace :standalone do
   desc "Build standalone script"
-  task build: "git-tracker"
+  task build: "pkg/git-tracker"
 
   desc "Build and install standalone script"
   task install: "standalone:build" do
     prefix = ENV["PREFIX"] || ENV["prefix"] || "/usr/local"
 
-    FileUtils.mkdir_p "#{prefix}/bin"
-    FileUtils.cp "git-tracker", "#{prefix}/bin", preserve: true
+    FileUtils.mkdir_p("#{prefix}/bin")
+    FileUtils.cp("pkg/git-tracker", "#{prefix}/bin", preserve: true)
   end
 
   task :homebrew do
