@@ -2,22 +2,25 @@ require "git_tracker/standalone"
 
 RSpec.describe GitTracker::Standalone do
   describe "#save" do
-    before do
-      File.delete "git-tracker" if File.exist? "git-tracker"
-    end
+    let(:binary) { Pathname(pkg_dir).join("git-tracker") }
+    let(:pkg_dir) { Pathname(@pkg_dir).to_path }
 
-    after do
-      File.delete "git-tracker" if File.exist? "git-tracker"
+    around do |example|
+      Dir.mktmpdir do |dir|
+        @pkg_dir = dir
+        example.call
+        remove_instance_variable(:@pkg_dir)
+      end
     end
 
     it "saves to the named file" do
-      described_class.save("git-tracker")
-      expect(File.size("./git-tracker")).to be > 100
+      described_class.save("git-tracker", path: pkg_dir)
+      expect(binary.size).to be > 100
     end
 
     it "marks the binary as executable" do
-      described_class.save("git-tracker")
-      expect(File).to be_executable("./git-tracker")
+      described_class.save("git-tracker", path: pkg_dir)
+      expect(binary).to be_executable
     end
   end
 
@@ -57,6 +60,10 @@ RSpec.describe GitTracker::Standalone do
 
     it "includes the call to call the hook" do
       expect(standalone_script).to include("GitTracker::Runner.call(*ARGV)")
+    end
+
+    it "includes requiring code from stdlib" do
+      expect(standalone_script).to match(/^require\s+["']pathname/)
     end
 
     it "excludes requiring git_tracker code" do

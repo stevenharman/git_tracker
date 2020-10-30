@@ -1,3 +1,5 @@
+require "pathname"
+
 module GitTracker
   class CommitMessage
     def initialize(file)

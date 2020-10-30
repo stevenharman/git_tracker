@@ -1,3 +1,4 @@
+require "pathname"
 require "git_tracker/repository"
 
 module GitTracker

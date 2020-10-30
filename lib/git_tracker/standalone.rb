@@ -1,8 +1,10 @@
+require "pathname"
+
 module GitTracker
   module Standalone
     extend self
 
-    GIT_TRACKER_ROOT = File.expand_path("../../..", __FILE__)
+    GIT_TRACKER_ROOT = Pathname(__dir__).join("../..")
     PREAMBLE = <<~DOC
       #
       # This file is generated code. DO NOT send patches for it.
@@ -17,7 +19,7 @@ module GitTracker
       io.puts(PREAMBLE)
 
       each_source_file do |filename|
-        File.open(filename, "r") do |source|
+        Pathname(filename).open("r") do |source|
           inline_source(source, io)
         end
       end
@@ -26,9 +28,9 @@ module GitTracker
       io
     end
 
-    def save(filename, path = ".")
-      dest = File.join(File.expand_path(path), filename)
-      File.open(dest, "w") do |f|
+    def save(filename, path: ".")
+      dest = Pathname(path).join(filename).expand_path
+      dest.open("w") do |f|
         build(f)
         f.chmod(0o755)
       end
@@ -37,10 +39,10 @@ module GitTracker
     private
 
     def each_source_file
-      File.open(File.join(GIT_TRACKER_ROOT, "lib/git_tracker.rb"), "r") do |main|
+      GIT_TRACKER_ROOT.join("lib/git_tracker.rb").open("r") do |main|
         main.each_line do |req|
           if req =~ /^require\s+["'](.+)["']/
-            yield File.join(GIT_TRACKER_ROOT, "lib", "#{$1}.rb")
+            yield GIT_TRACKER_ROOT.join("lib/#{$1}.rb").to_path
           end
         end
       end
