@@ -41,8 +41,8 @@ module GitTracker
     def each_source_file
       GIT_TRACKER_ROOT.join("lib/git_tracker.rb").open("r") do |main|
         main.each_line do |req|
-          if req =~ /^require\s+["'](.+)["']/
-            yield GIT_TRACKER_ROOT.join("lib/#{$1}.rb").to_path
+          if req =~ /^require\s+["']git_tracker\/(.+)["']/
+            yield GIT_TRACKER_ROOT.join("lib/git_tracker/#{$1}.rb").to_path
           end
         end
       end
